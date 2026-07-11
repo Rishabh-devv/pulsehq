@@ -1,3 +1,8 @@
+import AnalyticsStats from "../components/AnalyticsStats";
+import TrafficChart from "../components/TrafficChart";
+import TrafficSources from "../components/TrafficSources";
+
+
 function AnalyticsPage() {
   return (
     <>
@@ -8,13 +13,14 @@ function AnalyticsPage() {
         </p>
       </header>
 
-      <section className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
-        <h2 className="mb-2 text-xl font-semibold">Coming Soon 🚀</h2>
+      <div className="space-y-6">
+    <AnalyticsStats />
 
-        <p className="text-gray-500">
-          Analytics charts and reports will be available here.
-        </p>
-      </section>
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <TrafficChart />
+      <TrafficSources />
+    </div>
+  </div>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import StatCard from "@/features/dashboard/components/StatCard";
+import StatCard from "@/components/common/StatCard";
 import RevenueChart from "./components/RevenueChart";
 import RecentTransactions from "./components/RecentTransactions";
 
