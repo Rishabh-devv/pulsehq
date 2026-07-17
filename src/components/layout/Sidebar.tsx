@@ -57,7 +57,7 @@ const sidebarLinks: SidebarLink[] = [
 function Sidebar({ theme }: SidebarProps) {
   return (
     <aside
-      className={`flex h-screen w-64 flex-col border-r p-4 transition-colors ${
+      className={`flex h-screen w-64 shrink-0  flex-col border-r p-4 transition-colors ${
         theme === "light"
           ? "border-gray-200 bg-white"
           : "border-gray-700 bg-slate-800"

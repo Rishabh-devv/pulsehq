@@ -12,16 +12,16 @@ function AppLayout() {
   )};
 
   return (
-    <div className={`flex min-h-screen ${theme==="light"? "bg-slate-100":"bg-slate-900"}`}>
+    <div className={`flex h-screen ${theme==="light"? "bg-slate-100":"bg-slate-900"}`}>
       <Sidebar theme={theme}/>
 
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col overflow-hidden">
         <Navbar
           theme={theme}
           toggleTheme={toggleTheme}
         />
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 overflow-y-auto p-6">
           <Outlet />
         </main>
       </div>
