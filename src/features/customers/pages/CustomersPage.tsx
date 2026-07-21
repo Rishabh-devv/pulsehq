@@ -4,6 +4,7 @@ import { customers } from "../data/customers";
 import SearchBar from "@/components/common/SearchBar";
 import Pagination from "@/components/common/Pagination";
 import EmptyState from "@/components/common/EmptyState";
+import { Users } from "lucide-react";
 
 function CustomersPage() {
   // State
@@ -42,6 +43,7 @@ function CustomersPage() {
         <SearchBar value={search} onChange={setSearch} />
         {filteredCustomers.length === 0 ? (
           <EmptyState
+            icon={Users}
             title="No customers found"
             description="Try a different search."
           />

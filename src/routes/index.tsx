@@ -5,6 +5,7 @@ import SettingsPage from "@/features/settings/SettingsPage";
 import AnalyticsPage from "@/features/analytics/pages/AnalyticsPage";
 import CustomersPage from "@/features/customers/pages/CustomersPage";
 import RevenuePage from "@/features/revenue/pages/RevenuePage";
+import ReportsPage from "@/features/reports/pages/ReportsPage";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: "revenue",
                 element: <RevenuePage/>
+            },
+            {
+                path: "reports",
+                element: <ReportsPage/>
             }
         ]
     }

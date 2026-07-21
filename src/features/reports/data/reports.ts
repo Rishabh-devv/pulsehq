@@ -1,0 +1,51 @@
+import type { Report } from "../types/reports";
+export const reports: Report[] = [
+  {
+    id: 1,
+    name: "Sales Q1",
+    type: "PDF",
+    createdBy: "Pra",
+    date: "15 Jul 2026",
+    status: "Completed",
+  },
+  {
+    id: 2,
+    name: "Sales Q2",
+    type: "PDF",
+    createdBy: "yash",
+    date: "16 Jul 2026",
+    status: "Completed",
+  },
+  {
+    id: 3,
+    name: "Sales Q3",
+    type: "PDF",
+    createdBy: "Ashish",
+    date: "17 Jul 2026",
+    status: "Completed",
+  },
+  {
+    id: 4,
+    name: "Sales Q4",
+    type: "PDF",
+    createdBy: "Rishabh",
+    date: "18 Jul 2026",
+    status: "Completed",
+  },
+  {
+    id: 5,
+    name: "Sales Q5",
+    type: "PDF",
+    createdBy: "User",
+    date: "19 Jul 2026",
+    status: "Failed",
+  },
+  {
+    id: 6,
+    name: "Sales Q6",
+    type: "PDF",
+    createdBy: "Admin",
+    date: "20 Jul 2026",
+    status: "Pending",
+  },
+];
