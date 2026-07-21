@@ -1,28 +1,44 @@
 import ReportFilters from "../components/ReportFilters";
 import ReportsTable from "../components/ReportsTable";
 import { reports } from "../data/reports";
-import { useState } from "react";
-import EmptyState from "@/components/common/EmptyState";
+import { useState, useEffect } from "react";
+import Pagination from "@/components/common/Pagination";
+
+const REPORTS_PER_PAGE = 5;
 
 function ReportsPage() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("All");
   const [dateRange, setDateRange] = useState("Last 30 Days");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filteredReports = reports.filter((report) => {
-  const searchTerm = search.toLowerCase();
+    const searchTerm = search.toLowerCase();
 
-  const matchesSearch =
-    report.name.toLowerCase().includes(searchTerm) ||
-    report.createdBy.toLowerCase().includes(searchTerm) ||
-    report.type.toLowerCase().includes(searchTerm) ||
-    report.status.toLowerCase().includes(searchTerm);
+    const matchesSearch =
+      report.name.toLowerCase().includes(searchTerm) ||
+      report.createdBy.toLowerCase().includes(searchTerm) ||
+      report.type.toLowerCase().includes(searchTerm) ||
+      report.status.toLowerCase().includes(searchTerm);
 
-  const matchesStatus =
-    status === "All" || report.status === status;
+    const matchesStatus = status === "All" || report.status === status;
 
-  return matchesSearch && matchesStatus;
-});
+    return matchesSearch && matchesStatus;
+  });
+
+  const totalPages = Math.ceil(filteredReports.length / REPORTS_PER_PAGE);
+
+  const indexOfLastReport = currentPage * REPORTS_PER_PAGE;
+  const indexOfFirstReport = indexOfLastReport - REPORTS_PER_PAGE;
+
+  const currentReports = filteredReports.slice(
+    indexOfFirstReport,
+    indexOfLastReport
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, status, dateRange]);
   return (
     <>
       <header className="mb-8 flex items-start justify-between">
@@ -46,8 +62,14 @@ function ReportsPage() {
         dateRange={dateRange}
         onDateRangeChange={setDateRange}
       />
-      <ReportsTable reports={filteredReports} />
-      
+      <ReportsTable reports={currentReports} />
+      {totalPages > 1 && (
+        <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+        />
+)}
     </>
   );
 }
