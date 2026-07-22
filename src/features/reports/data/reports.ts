@@ -44,7 +44,7 @@ export const reports: Report[] = [
     id: 6,
     name: "Sales Q6",
     type: "PDF",
-    createdBy: "Admin",
+    createdBy: "Pratigya",
     date: "20 Jul 2026",
     status: "Pending",
   },
