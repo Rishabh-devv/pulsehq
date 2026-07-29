@@ -28,10 +28,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const savedUser = localStorage.getItem("user");
 
   if (savedUser) {
-    setUser(JSON.parse(savedUser));
+    const parsedUser: User = JSON.parse(savedUser);
+
+    setUser(parsedUser);
   }
 }, []);
-
   const isAuthenticated = user !== null;
 
   
