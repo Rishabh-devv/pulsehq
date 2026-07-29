@@ -1,25 +1,25 @@
 interface SettingsActionsProps {
   isDirty: boolean;
-  onCancel: ()=>void;
-  onSave: ()=>void
+  onCancel: () => void;
+  onSave: () => void;
 }
 
+import Button from "@/components/common/Button";
+
 export default function SettingsActions({
-  isDirty,onCancel,onSave
+  isDirty,
+  onCancel,
+  onSave,
 }: SettingsActionsProps) {
   return (
     <div className="mt-6 flex justify-end gap-3">
-      <button className="rounded-lg border border-gray-300 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-100" onClick={onCancel}>
+      <Button variant="secondary" onClick={onCancel}>
         Cancel
-      </button>
+      </Button>
 
-      <button
-        disabled={!isDirty}
-        onClick={onSave}
-        className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
-      >
+      <Button onClick={onSave} disabled={!isDirty}>
         Save Changes
-      </button>
+      </Button>
     </div>
   );
 }

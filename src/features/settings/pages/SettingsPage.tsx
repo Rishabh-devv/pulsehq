@@ -1,7 +1,7 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import ProfileSection from "../components/ProfileSection";
 import SettingsActions from "../components/SettingsActions";
-import type { Profile } from "../types/Profile";
+import type { Profile } from "../types/profile";
 import Toast from "@/components/common/Toast";
 
 const defaultProfile: Profile = {
@@ -29,19 +29,20 @@ function SettingsPage() {
     setProfile(initialProfile);
   };
   const handleSave = () => {
+    if (!isDirty) return;
     setInitialProfile(profile);
     setShowToast(true);
   };
 
   useEffect(() => {
-  if (!showToast) return;
+    if (!showToast) return;
 
-  const timer = setTimeout(() => {
-    setShowToast(false);
-  }, 3000);
+    const timer = setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
 
-  return () => clearTimeout(timer);
-}, [showToast]);
+    return () => clearTimeout(timer);
+  }, [showToast]);
 
   return (
     <>

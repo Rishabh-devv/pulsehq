@@ -6,8 +6,13 @@ import AnalyticsPage from "@/features/analytics/pages/AnalyticsPage";
 import CustomersPage from "@/features/customers/pages/CustomersPage";
 import RevenuePage from "@/features/revenue/pages/RevenuePage";
 import ReportsPage from "@/features/reports/pages/ReportsPage";
+import LoginPage from "@/features/auth/pages/LoginPage";
 
 export const router = createBrowserRouter([
+    {
+        path: "/login",
+        element: <LoginPage />,
+    },
     {
         path: "/",
         element: <AppLayout />,

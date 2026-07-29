@@ -3,6 +3,7 @@ import ReportsTable from "../components/ReportsTable";
 import { reports } from "../data/reports";
 import { useState, useEffect } from "react";
 import Pagination from "@/components/common/Pagination";
+import Button from "@/components/common/Button";
 
 const REPORTS_PER_PAGE = 5;
 
@@ -50,9 +51,9 @@ function ReportsPage() {
           </p>
         </div>
 
-        <button className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700">
+        <Button>
           Export Report
-        </button>
+        </Button>
       </header>
       <ReportFilters
         search={search}
