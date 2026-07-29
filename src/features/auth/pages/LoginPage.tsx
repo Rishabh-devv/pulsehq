@@ -12,6 +12,7 @@ import { authService } from "@/services/authService";
 function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -29,20 +30,21 @@ function LoginPage() {
 
   const onSubmit = async (data: LoginForm) => {
     try {
+      setServerError("");
       setIsLoading(true);
       const user = await authService.login(data.email, data.password);
 
       login(user);
       navigate("/");
-      console.log("Logged In");
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        setServerError(error.message);
       }
     } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lg">
@@ -60,7 +62,9 @@ function LoginPage() {
             type="email"
             placeholder="Enter your email"
             error={errors.email?.message}
-            {...register("email")}
+            {...register("email", {
+              onChange: () => setServerError(""),
+            })}
           />
 
           <TextInput
@@ -68,7 +72,9 @@ function LoginPage() {
             type="password"
             placeholder="Enter your password"
             error={errors.password?.message}
-            {...register("password")}
+            {...register("password", {
+              onChange: () => setServerError(""),
+            })}
           />
 
           <Checkbox
@@ -76,6 +82,7 @@ function LoginPage() {
             checked={rememberMe}
             onChange={setRememberMe}
           />
+          {serverError && <p className="text-sm text-red-500">{serverError}</p>}
 
           <Button type="submit" disabled={isLoading}>
             {isLoading ? "Signing In..." : "Sign In"}
