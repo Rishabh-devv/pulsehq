@@ -9,7 +9,8 @@ import {
   User,
   Users,
 } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 type SidebarLink = {
   title: string;
@@ -55,6 +56,13 @@ const sidebarLinks: SidebarLink[] = [
 ];
 
 function Sidebar({ theme }: SidebarProps) {
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+  logout();
+  navigate("/login");
+};
   return (
     <aside
       className={`flex h-screen w-64 shrink-0  flex-col border-r p-4 transition-colors ${
@@ -128,7 +136,8 @@ function Sidebar({ theme }: SidebarProps) {
                 theme === "light" ? "text-gray-900" : "text-white"
               }`}
             >
-              Rishabh Soni
+              {/* Rishabh Soni */}
+              {user?.name}
             </p>
             <p
               className={`text-sm ${
@@ -146,6 +155,7 @@ function Sidebar({ theme }: SidebarProps) {
               ? "text-gray-700 hover:bg-red-50 hover:text-red-600"
               : "text-gray-300 hover:bg-red-900/30 hover:text-red-400"
           }`}
+          onClick={handleLogout}
         >
           <LogOut size={18} />
           Logout

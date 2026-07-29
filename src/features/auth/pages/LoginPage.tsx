@@ -7,9 +7,11 @@ import TextInput from "@/components/common/TextInput";
 import Checkbox from "@/components/common/Checkbox";
 import Button from "@/components/common/Button";
 import { useAuth } from "@/hooks/useAuth";
+import { authService } from "@/services/authService";
 
 function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -25,33 +27,34 @@ function LoginPage() {
     },
   });
 
-  const onSubmit = (data: LoginForm) => {
-  login({
-    id: crypto.randomUUID(),
-    name: "Rishabh Soni",
-    email: data.email,
-  });
-  navigate("/");
+  const onSubmit = async (data: LoginForm) => {
+    try {
+      setIsLoading(true);
+      const user = await authService.login(data.email, data.password);
 
-  console.log("Logged In");
-};
+      login(user);
+      navigate("/");
+      console.log("Logged In");
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lg">
         <h1 className="text-center text-3xl font-bold text-blue-600">
           PulseHQ
         </h1>
-        <h2 className="mt-6 text-center text-2xl font-bold">
-          Welcome back 👋
-        </h2>
+        <h2 className="mt-6 text-center text-2xl font-bold">Welcome back 👋</h2>
 
         <p className="mt-2 text-center text-gray-500">
           Sign in to continue to PulseHQ.
         </p>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-8 space-y-6"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
           <TextInput
             label="Email"
             type="email"
@@ -74,8 +77,8 @@ function LoginPage() {
             onChange={setRememberMe}
           />
 
-          <Button type="submit">
-            Sign In
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Signing In..." : "Sign In"}
           </Button>
         </form>
 
