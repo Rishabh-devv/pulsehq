@@ -8,17 +8,40 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-
-const revenueData = [
-  { month: "Jan", revenue: 4000 },
-  { month: "Feb", revenue: 3000 },
-  { month: "Mar", revenue: 5000 },
-  { month: "Apr", revenue: 4500 },
-  { month: "May", revenue: 6000 },
-  { month: "Jun", revenue: 5500 },
-];
+import { useQuery } from "@tanstack/react-query";
+import { dashboardService } from "@/services/dashboardService";
 
 function RevenueChart() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["dashboard", "revenue"],
+    queryFn: dashboardService.getRevenueChart,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold">Revenue Overview</h2>
+        <div className="mt-4 flex h-80 items-center justify-center">
+          <p className="text-gray-500">Loading revenue...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold">Revenue Overview</h2>
+        <div className="mt-4 flex h-80 items-center justify-center">
+          <p className="text-red-500">
+            {error instanceof Error
+              ? error.message
+              : "Something went wrong"}
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5 transition hover:shadow-md">
         <header>
@@ -26,7 +49,7 @@ function RevenueChart() {
         </header>
         <section className="mt-4 h-80">
             <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={revenueData}>
+                <LineChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month"/>
                     <YAxis/>

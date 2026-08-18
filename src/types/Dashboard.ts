@@ -4,3 +4,16 @@ export type DashboardStats = {
   orders: number;
   growth: number;
 };
+
+export type Transaction = {
+  id: string;
+  customer: string;
+  amount: number;
+  date: string;
+  status: "Completed" | "Pending" | "Failed";
+};
+
+export type RevenueData = {
+  month: string;
+  revenue: number;
+};

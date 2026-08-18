@@ -1,36 +1,38 @@
-type Transaction = {
-  customer: string;
-  status: "Paid" | "Pending" | "Failed";
-  amount: string;
-  date: string;
-};
-
-const transactions: Transaction[] = [
-  {
-    customer: "John Doe",
-    status: "Paid",
-    amount: "$2,500",
-    date: "21 Jul",
-  },
-  {
-    customer: "Sarah",
-    status: "Pending",
-    amount: "$1,800",
-    date: "22 Jul",
-  },
-  {
-    customer: "Mike",
-    status: "Failed",
-    amount: "$900",
-    date: "23 Jul",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { dashboardService } from "@/services/dashboardService";
+import type { Transaction } from "@/types/Dashboard";
+import { formatDate } from "@/utils/date";
 
 function RecentTransactions() {
+  const {
+    data,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["dashboard", "transactions"],
+    queryFn: dashboardService.getRecentTransactions,
+  });
+
+  if (isLoading) {
+    return <p>Loading transactions...</p>;
+  }
+
+  if (error) {
+    return (
+      <p>
+        {error instanceof Error
+          ? error.message
+          : "Something went wrong"}
+      </p>
+    );
+  }
+
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
       <header className="mb-4">
-        <h2 className="text-xl font-semibold">Recent Transactions</h2>
+        <h2 className="text-xl font-semibold">
+          Recent Transactions
+        </h2>
       </header>
 
       <table className="w-full">
@@ -42,9 +44,11 @@ function RecentTransactions() {
             <th className="pb-3 text-sm font-medium text-gray-500">
               Status
             </th>
+
             <th className="pb-3 text-sm font-medium text-gray-500">
               Amount
             </th>
+
             <th className="pb-3 text-sm font-medium text-gray-500">
               Date
             </th>
@@ -52,17 +56,18 @@ function RecentTransactions() {
         </thead>
 
         <tbody>
-          {transactions.map((transaction) => (
+          {data.map((transaction: Transaction) => (
             <tr
-              key={transaction.customer}
+              key={transaction.id}
               className="border-b last:border-none"
             >
-              <td className="py-4">{transaction.customer}</td>
-
+              <td className="py-4">
+                {transaction.customer}
+              </td>
               <td className="py-4">
                 <span
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    transaction.status === "Paid"
+                  className={`rounded-full px-2 py-1 text-xs font-medium ${
+                    transaction.status === "Completed"
                       ? "bg-green-100 text-green-700"
                       : transaction.status === "Failed"
                       ? "bg-red-100 text-red-700"
@@ -74,11 +79,11 @@ function RecentTransactions() {
               </td>
 
               <td className="py-4 font-medium">
-                {transaction.amount}
+                ${transaction.amount.toLocaleString()}
               </td>
 
               <td className="py-4 text-gray-500">
-                {transaction.date}
+                {formatDate(transaction.date)}
               </td>
             </tr>
           ))}

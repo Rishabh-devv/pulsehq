@@ -31,46 +31,46 @@ function RevenueChart({ data }: RevenueChartProps) {
             </linearGradient>
           </defs>
           <CartesianGrid
-  stroke="#E5E7EB"
-  strokeDasharray="3 3"
-  vertical={false}
-/>
+            stroke="#E5E7EB"
+            strokeDasharray="3 3"
+            vertical={false}
+          />
 
           <XAxis
-  dataKey="month"
-  tickLine={false}
-  axisLine={false}
-  tick={{ fill: "#6B7280", fontSize: 14 }}
-/>
+            dataKey="month"
+            tickLine={false}
+            axisLine={false}
+            tick={{ fill: "#6B7280", fontSize: 14 }}
+          />
 
           <YAxis
-  tickFormatter={formatCurrency}
-  tickLine={false}
-  axisLine={false}
-  tick={{ fill: "#6B7280", fontSize: 14 }}
-/>
+            tickFormatter={formatCurrency}
+            tickLine={false}
+            axisLine={false}
+            tick={{ fill: "#6B7280", fontSize: 14 }}
+          />
 
           <Tooltip content={<RevenueChartTooltip />} />
 
           <Area
-  type="monotone"
-  dataKey="revenue"
-  stroke="#2563eb"
-  strokeWidth={3}
-  fill="url(#revenueGradient)"
-  isAnimationActive={true}
-  animationDuration={1200}
-  dot={{
-    r: 4,
-    fill: "#ffffff",
-    stroke: "#2563eb",
-    strokeWidth: 2,
-  }}
-  activeDot={{
-    r: 6,
-    fill: "#2563eb",
-  }}
-/>
+            type="monotone"
+            dataKey="revenue"
+            stroke="#2563eb"
+            strokeWidth={3}
+            fill="url(#revenueGradient)"
+            isAnimationActive={true}
+            animationDuration={1200}
+            dot={{
+              r: 4,
+              fill: "#ffffff",
+              stroke: "#2563eb",
+              strokeWidth: 2,
+            }}
+            activeDot={{
+              r: 6,
+              fill: "#2563eb",
+            }}
+          />
         </AreaChart>
       </ResponsiveContainer>
     </div>

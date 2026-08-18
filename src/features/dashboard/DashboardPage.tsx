@@ -17,7 +17,7 @@ function DashboardPage() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["dashboard"],
+    queryKey: ["dashboard","stats"],
     queryFn: dashboardService.getDashboardStats,
   });
 
