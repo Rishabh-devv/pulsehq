@@ -1,6 +1,5 @@
 import StatusBadge from "@/components/common/StatusBadge";
-import type { Customer } from "../types/customer";
-
+import type { Customer } from "@/types/Customer";
 
 interface CustomerTableProps {
   customers: Customer[];
@@ -34,8 +33,8 @@ function CustomerTable({ customers }: CustomerTableProps) {
                 <td className="px-4 py-3">{customer.email}</td>
                 <td className="px-4 py-3">{customer.plan}</td>
                 <td className="px-4 py-3">
-                    <StatusBadge status={customer.status} />
-                </td>       
+                  <StatusBadge status={customer.status} />
+                </td>
                 <td className="px-4 py-3">{customer.country}</td>
                 <td className="px-4 py-3">
                   ${customer.totalSpend.toLocaleString()}

@@ -4,66 +4,50 @@ import type { Transaction } from "@/types/Dashboard";
 import { formatDate } from "@/utils/date";
 
 function RecentTransactions() {
-  const {
-    data,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["dashboard", "transactions"],
     queryFn: dashboardService.getRecentTransactions,
   });
 
   if (isLoading) {
-    return <p>Loading transactions...</p>;
+    return (
+      <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold">Recent Transactions</h2>
+        <div className="mt-4 flex h-80 items-center justify-center">
+          <p className="text-gray-500">Loading transactions...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
     return (
-      <p>
-        {error instanceof Error
-          ? error.message
-          : "Something went wrong"}
-      </p>
+      <p>{error instanceof Error ? error.message : "Something went wrong"}</p>
     );
   }
 
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
       <header className="mb-4">
-        <h2 className="text-xl font-semibold">
-          Recent Transactions
-        </h2>
+        <h2 className="text-xl font-semibold">Recent Transactions</h2>
       </header>
 
       <table className="w-full">
         <thead>
           <tr className="border-b text-left">
-            <th className="pb-3 text-sm font-medium text-gray-500">
-              Customer
-            </th>
-            <th className="pb-3 text-sm font-medium text-gray-500">
-              Status
-            </th>
+            <th className="pb-3 text-sm font-medium text-gray-500">Customer</th>
+            <th className="pb-3 text-sm font-medium text-gray-500">Status</th>
 
-            <th className="pb-3 text-sm font-medium text-gray-500">
-              Amount
-            </th>
+            <th className="pb-3 text-sm font-medium text-gray-500">Amount</th>
 
-            <th className="pb-3 text-sm font-medium text-gray-500">
-              Date
-            </th>
+            <th className="pb-3 text-sm font-medium text-gray-500">Date</th>
           </tr>
         </thead>
 
         <tbody>
           {data.map((transaction: Transaction) => (
-            <tr
-              key={transaction.id}
-              className="border-b last:border-none"
-            >
-              <td className="py-4">
-                {transaction.customer}
-              </td>
+            <tr key={transaction.id} className="border-b last:border-none">
+              <td className="py-4">{transaction.customer}</td>
               <td className="py-4">
                 <span
                   className={`rounded-full px-2 py-1 text-xs font-medium ${

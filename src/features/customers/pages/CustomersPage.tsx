@@ -1,23 +1,62 @@
 import { useEffect, useState } from "react";
 import CustomerTable from "../components/CustomerTable";
-import { customers } from "../data/customers";
 import SearchBar from "@/components/common/SearchBar";
 import Pagination from "@/components/common/Pagination";
 import EmptyState from "@/components/common/EmptyState";
 import { Users } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { customerService } from "@/services/customerService";
+import TableSkeleton from "@/components/common/TableSkeleton";
+import CustomerFilters from "../components/CustomerFilters";
+import type { Customer } from "@/types/Customer";
 
 function CustomersPage() {
   // State
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [plan, setPlan] = useState<Customer["plan"] | "All">("All");
+  const [status, setStatus] = useState<Customer["status"] | "All">("All");
+  const {
+    data: customers = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["customers"],
+    queryFn: customerService.getCustomers,
+  });
 
-  // Constants
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, plan, status]);
+
+  if (isLoading) {
+    return <TableSkeleton rows={5} columns={7} />;
+  }
+
+  if (error) {
+    return (
+      <p>{error instanceof Error ? error.message : "Something went wrong"}</p>
+    );
+  }
+  const handleClearFilters = () => {
+    setSearch("");
+    setPlan("All");
+    setStatus("All");
+  };
   const CUSTOMERS_PER_PAGE = 5;
 
   // Derived State
-  const filteredCustomers = customers.filter((customer) =>
-    customer.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredCustomers = customers.filter((customer) => {
+    const matchesSearch = customer.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesPlan = plan === "All" || customer.plan === plan;
+
+    const matchesStatus = status === "All" || customer.status === status;
+
+    return matchesSearch && matchesPlan && matchesStatus;
+  });
 
   const totalPages = Math.ceil(filteredCustomers.length / CUSTOMERS_PER_PAGE);
 
@@ -28,11 +67,7 @@ function CustomersPage() {
     indexOfFirstCustomer,
     indexOfLastCustomer
   );
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search]);
-
+  const hasActiveFilters = search !== "" || plan !== "All" || status !== "All";
   return (
     <>
       <header className="mb-8">
@@ -40,7 +75,17 @@ function CustomersPage() {
         <p className="mt-2 text-gray-500">View and manage your customers.</p>
       </header>
       <div className="space-y-6">
-        <SearchBar value={search} onChange={setSearch} />
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <SearchBar value={search} onChange={setSearch} />
+          <CustomerFilters
+            plan={plan}
+            status={status}
+            hasActiveFilters={hasActiveFilters}
+            onPlanChange={setPlan}
+            onStatusChange={setStatus}
+            onClear={handleClearFilters}
+          />
+        </div>
         {filteredCustomers.length === 0 ? (
           <EmptyState
             icon={Users}

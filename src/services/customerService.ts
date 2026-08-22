@@ -1,9 +1,7 @@
-import type{ Customer } from "../types/customer";
+import type { Customer } from "@/types/Customer";
 
-
-export const customers:Customer[] = [
-    {
-        id: 1,
+const DEMO_CUSTOMERS: Customer[] = [ {
+        id: "cust_001",
         name: "Rishabh",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -13,27 +11,27 @@ export const customers:Customer[] = [
         totalSpend: 2000,
     },
     {
-        id: 2,
+        id: "cust_002",
         name: "Ashish",
         email: "xyz@gmail.com",
-        plan: "Free",
+        plan: "Pro",
         status: "Inactive",
         joinedDate: "01 Apr 2025",
         country: "India",
         totalSpend: 2000,
     },
     {
-        id: 3,
+        id: "cust_003",
         name: "Vishal",
         email: "xyz@gmail.com",
-        plan: "Free",
+        plan: "Enterprise",
         status: "Active",
         joinedDate: "01 Apr 2025",
         country: "India",
         totalSpend: 2000,
     },
     {
-        id: 4,
+        id: "cust_004",
         name: "Tapas",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -43,7 +41,7 @@ export const customers:Customer[] = [
         totalSpend: 2000,
     },
     {
-        id: 5,
+        id: "cust_005",
         name: "Mayank",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -53,7 +51,7 @@ export const customers:Customer[] = [
         totalSpend: 2000,
     }
     ,{
-        id: 6,
+        id: "cust_006",
         name: "Chitransh",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -63,7 +61,7 @@ export const customers:Customer[] = [
         totalSpend: 2000,
     },
     {
-        id: 7,
+        id: "cust_007",
         name: "Yograj",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -74,7 +72,7 @@ export const customers:Customer[] = [
     }
     ,
     {
-        id: 8,
+        id: "cust_008",
         name: "Akhil",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -84,7 +82,7 @@ export const customers:Customer[] = [
         totalSpend: 2000,
     },
     {
-        id: 10,
+        id: "cust_009",
         name: "Richa",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -95,7 +93,7 @@ export const customers:Customer[] = [
     }
     ,
     {
-        id: 11,
+        id: "cust_010",
         name: "Avi",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -106,7 +104,7 @@ export const customers:Customer[] = [
     }
     ,
     {
-        id: 12,
+        id: "cust_011",
         name: "Manoj",
         email: "xyz@gmail.com",
         plan: "Free",
@@ -115,6 +113,12 @@ export const customers:Customer[] = [
         country: "India",
         totalSpend: 2000,
     }
+];
 
-]
+export const customerService = {
+  async getCustomers(): Promise<Customer[]> {
+    await new Promise((resolve)=>setTimeout(resolve,1000));
+    return DEMO_CUSTOMERS
 
+  },
+};

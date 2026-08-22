@@ -9,6 +9,7 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const login = (user: User) => {
     setUser(user);
@@ -31,6 +32,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const parsedUser: User = JSON.parse(savedUser);
 
     setUser(parsedUser);
+    setIsLoading(false);
   }
 }, []);
   const isAuthenticated = user !== null;
@@ -44,6 +46,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         isAuthenticated,
         login,
         logout,
+        isLoading
       }}
     >
       {children}
