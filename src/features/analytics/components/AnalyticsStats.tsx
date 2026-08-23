@@ -1,20 +1,87 @@
-import { analyticsMetrics } from "../data/analyticsStats";
+import { useQuery } from "@tanstack/react-query";
+import {
+  Coins,
+  Users,
+  TrendingUp,
+  Activity,
+} from "lucide-react";
+
 import StatCard from "@/components/common/StatCard";
+import { analyticsService } from "@/services/analyticsService";
 
 function AnalyticsStats() {
-  return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {analyticsMetrics.map((stat) => (
-          <StatCard
-            key={stat.title}
-            title={stat.title}
-            value={stat.value}
-            change={stat.change}
-            icon={stat.icon}
+  const {
+    data,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["analytics", "overview"],
+    queryFn: analyticsService.getOverview,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[1, 2, 3, 4].map((item) => (
+          <div
+            key={item}
+            className="h-32 animate-pulse rounded-xl bg-gray-200"
           />
         ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <p className="text-red-500">
+        {error instanceof Error
+          ? error.message
+          : "Something went wrong"}
+      </p>
+    );
+  }
+
+  const analyticsMetrics = [
+    {
+      title: "Revenue",
+      value: `$${data.revenue.toLocaleString()}`,
+      change: "+5%",
+      icon: Coins,
+    },
+    {
+      title: "Visitors",
+      value: data.visitors.toLocaleString(),
+      change: "+8%",
+      icon: Users,
+    },
+    {
+      title: "Conversion Rate",
+      value: `${data.conversionRate}%`,
+      change: "+3%",
+      icon: TrendingUp,
+    },
+    {
+      title: "Bounce Rate",
+      value: `${data.bounceRate}%`,
+      change: "-2%",
+      icon: Activity,
+    },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {analyticsMetrics.map((stat) => (
+        <StatCard
+          key={stat.title}
+          title={stat.title}
+          value={stat.value}
+          change={stat.change}
+          icon={stat.icon}
+        />
+      ))}
     </div>
-  )
+  );
 }
 
-export default AnalyticsStats
+export default AnalyticsStats;
