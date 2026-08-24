@@ -1,19 +1,20 @@
-import type { Report } from "../types/reports";
-export const reports: Report[] = [
+import type { Report } from "@/types/Report";
+
+const DEMO_REPORTS: Report[] = [
   {
     id: 1,
     name: "Sales Q1",
     type: "PDF",
-    createdBy: "Pra",
-    date: "15 Jul 2026",
+    createdBy: "Pratigya (GF)",
+    date: "02 Aug 2026",
     status: "Completed",
   },
   {
     id: 2,
     name: "Sales Q2",
     type: "PDF",
-    createdBy: "yash",
-    date: "16 Jul 2026",
+    createdBy: "Sharma",
+    date: "06 Aug 2026",
     status: "Completed",
   },
   {
@@ -21,7 +22,7 @@ export const reports: Report[] = [
     name: "Sales Q3",
     type: "PDF",
     createdBy: "Ashish",
-    date: "17 Jul 2026",
+    date: "10 Aug 2026",
     status: "Completed",
   },
   {
@@ -29,7 +30,7 @@ export const reports: Report[] = [
     name: "Sales Q4",
     type: "PDF",
     createdBy: "Rishabh",
-    date: "18 Jul 2026",
+    date: "15 Aug 2026",
     status: "Completed",
   },
   {
@@ -37,7 +38,7 @@ export const reports: Report[] = [
     name: "Sales Q5",
     type: "PDF",
     createdBy: "User",
-    date: "19 Jul 2026",
+    date: "19 Aug 2026",
     status: "Failed",
   },
   {
@@ -45,7 +46,17 @@ export const reports: Report[] = [
     name: "Sales Q6",
     type: "PDF",
     createdBy: "Pratigya",
-    date: "20 Jul 2026",
+    date: "22 Aug 2026",
     status: "Pending",
   },
 ];
+
+export const reportsService = {
+  async getReports(): Promise<Report[]> {
+    await new Promise((resolve) =>
+      setTimeout(resolve, 1000)
+    );
+
+    return DEMO_REPORTS;
+  },
+};
