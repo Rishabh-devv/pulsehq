@@ -1,12 +1,26 @@
 import StatCard from "@/components/common/StatCard";
 import type { RevenueCardsProps } from "../types/revenue";
 import { DollarSign, Users, TrendingUp } from "lucide-react";
+import SkeletonCard from "@/components/common/SkeletonCard";
+interface RevenueCardsPropsWithLoading extends RevenueCardsProps {
+  isLoading: boolean;
+}
 
 function RevenueCards({
   revenue,
   customers,
   growth,
-}: RevenueCardsProps) {
+  isLoading,
+}: RevenueCardsPropsWithLoading) {
+  if (isLoading) {
+    return (
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <SkeletonCard />
+        <SkeletonCard />
+        <SkeletonCard />
+      </div>
+    );
+  }
   const revenueCards = [
   {
     title: "Revenue",

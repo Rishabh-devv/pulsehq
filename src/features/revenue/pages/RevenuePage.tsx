@@ -1,37 +1,28 @@
-import RecentTransactions from "@/features/dashboard/components/RecentTransactions";
+import { useQuery } from "@tanstack/react-query";
+import RecentTransactions from "@/components/common/RecentTransactions";
 import RevenueCards from "../components/RevenueCards";
 import RevenueChart from "../components/RevenueChart";
-import type { RevenueChartData } from "../types/revenue";
+import { revenueService } from "@/services/revenueService";
 
 function RevenuePage() {
-  const revenue = {
-    value: "$52,430",
-    change: "+12%",
-  };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["revenue"],
+    queryFn: revenueService.getRevenueData,
+  });
 
-  const customers = {
-    value: "1,245",
-    change: "+8%",
-  };
-
-  const growth = {
-    value: "18%",
-    change: "+2%",
-  };
-
-  const revenueData: RevenueChartData[] = [
-    { month: "Jan", revenue: 12000 },
-    { month: "Feb", revenue: 15000 },
-    { month: "Mar", revenue: 18000 },
-    { month: "Apr", revenue: 17000 },
-    { month: "May", revenue: 22000 },
-    { month: "Jun", revenue: 26000 },
-  ];
+  if (error) {
+    return (
+      <p className="text-red-500">
+        {error instanceof Error ? error.message : "Something went wrong"}
+      </p>
+    );
+  }
 
   return (
     <>
       <header className="mb-8">
         <h1 className="text-3xl font-bold">Revenue</h1>
+
         <p className="mt-2 text-gray-500">
           Track your revenue performance and transactions.
         </p>
@@ -39,13 +30,12 @@ function RevenuePage() {
 
       <div className="space-y-6">
         <RevenueCards
-          revenue={revenue}
-          customers={customers}
-          growth={growth}
+          revenue={data?.revenue ?? { value: "", change: "" }}
+          customers={data?.customers ?? { value: "", change: "" }}
+          growth={data?.growth ?? { value: "", change: "" }}
+          isLoading={isLoading}
         />
-
-        <RevenueChart data={revenueData} />
-
+        {data && <RevenueChart data={data.chartData} />}
         <RecentTransactions />
       </div>
     </>

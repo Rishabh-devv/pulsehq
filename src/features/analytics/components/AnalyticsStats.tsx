@@ -8,6 +8,8 @@ import {
 
 import StatCard from "@/components/common/StatCard";
 import { analyticsService } from "@/services/analyticsService";
+import SkeletonCard from "@/components/common/SkeletonCard";
+
 
 function AnalyticsStats() {
   const {
@@ -21,15 +23,12 @@ function AnalyticsStats() {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {[1, 2, 3, 4].map((item) => (
-          <div
-            key={item}
-            className="h-32 animate-pulse rounded-xl bg-gray-200"
-          />
-        ))}
-      </div>
-    );
+    <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {Array.from({ length: 4 }).map((_, index) => (
+        <SkeletonCard key={index} />
+      ))}
+    </section>
+  );
   }
 
   if (error) {

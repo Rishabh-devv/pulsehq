@@ -36,6 +36,13 @@ const DEMO_TRANSACTIONS: Transaction[] = [
     date: "2023-08-04",
     status: "Completed",
   },
+  {
+    id: "5",
+    customer: "Michael Jackson",
+    amount: 500,
+    date: "2023-08-08",
+    status: "Failed",
+  },
 ];
 
 const DEMO_REVENUE_DATA: RevenueData[] = [

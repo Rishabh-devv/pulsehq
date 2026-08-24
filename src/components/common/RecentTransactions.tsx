@@ -10,10 +10,12 @@ function RecentTransactions() {
   });
 
   if (isLoading) {
-    return (
-      <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold">Recent Transactions</h2>
-        <div className="mt-4 flex h-80 items-center justify-center">
+     return (
+      <div className="rounded-xl bg-white p-6 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold">
+          Revenue Transactions
+        </h2>
+        <div className="mt-4 flex h-80 items-center justify-center animate-pulse rounded-lg bg-gray-100">
           <p className="text-gray-500">Loading transactions...</p>
         </div>
       </div>

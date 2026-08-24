@@ -28,7 +28,9 @@ function TrafficChart() {
           Traffic Overview
         </h2>
 
-        <div className="h-80 animate-pulse rounded-lg bg-gray-100" />
+        <div className="mt-4 flex h-80 items-center justify-center animate-pulse rounded-lg bg-gray-100">
+          <p className="text-gray-500">Loading Traffic Overview...</p>
+        </div>
       </div>
     );
   }

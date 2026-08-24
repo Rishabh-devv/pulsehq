@@ -29,10 +29,6 @@ function CustomersPage() {
     setCurrentPage(1);
   }, [search, plan, status]);
 
-  if (isLoading) {
-    return <TableSkeleton rows={5} columns={7} />;
-  }
-
   if (error) {
     return (
       <p>{error instanceof Error ? error.message : "Something went wrong"}</p>
@@ -86,7 +82,9 @@ function CustomersPage() {
             onClear={handleClearFilters}
           />
         </div>
-        {filteredCustomers.length === 0 ? (
+        {isLoading ? (
+          <TableSkeleton rows={5} columns={7} />
+        ) : filteredCustomers.length === 0 ? (
           <EmptyState
             icon={Users}
             title="No customers found"
@@ -95,6 +93,7 @@ function CustomersPage() {
         ) : (
           <>
             <CustomerTable customers={currentCustomers} />
+
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
