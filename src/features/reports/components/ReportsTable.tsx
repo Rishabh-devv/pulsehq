@@ -3,6 +3,7 @@ import StatusBadge from "@/components/common/StatusBadge";
 import { Download } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
 import { FileText } from "lucide-react";
+import { downloadReport } from "@/utils/downloadReport";
 
 interface ReportsTableProps {
   reports: Report[];
@@ -66,6 +67,7 @@ function ReportsTable({ reports }: ReportsTableProps) {
               <td className="px-6 py-4">
                 <button
                   type="button"
+                  onClick={() => downloadReport(report)}
                   className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50 hover:text-blue-700"
                 >
                   <Download size={16} />

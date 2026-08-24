@@ -6,12 +6,10 @@ import Pagination from "@/components/common/Pagination";
 import Button from "@/components/common/Button";
 import { reportsService } from "@/services/reportsService";
 import TableSkeleton from "@/components/common/TableSkeleton";
+import { exportReports } from "@/utils/exportReports";
 
 const REPORTS_PER_PAGE = 5;
-function isWithinDateRange(
-  reportDate: string,
-  dateRange: string
-): boolean {
+function isWithinDateRange(reportDate: string, dateRange: string): boolean {
   const reportDateObject = new Date(reportDate);
   const today = new Date();
 
@@ -20,9 +18,7 @@ function isWithinDateRange(
   reportDateObject.setHours(0, 0, 0, 0);
 
   if (dateRange === "This Year") {
-    return (
-      reportDateObject.getFullYear() === today.getFullYear()
-    );
+    return reportDateObject.getFullYear() === today.getFullYear();
   }
 
   const daysMap: Record<string, number> = {
@@ -40,10 +36,7 @@ function isWithinDateRange(
   const startDate = new Date(today);
   startDate.setDate(today.getDate() - days);
 
-  return (
-    reportDateObject >= startDate &&
-    reportDateObject <= today
-  );
+  return reportDateObject >= startDate && reportDateObject <= today;
 }
 
 function ReportsPage() {
@@ -74,28 +67,20 @@ function ReportsPage() {
   }
 
   const filteredReports = reports.filter((report) => {
-  const searchTerm = search.toLowerCase();
+    const searchTerm = search.toLowerCase();
 
-  const matchesSearch =
-    report.name.toLowerCase().includes(searchTerm) ||
-    report.createdBy.toLowerCase().includes(searchTerm) ||
-    report.type.toLowerCase().includes(searchTerm) ||
-    report.status.toLowerCase().includes(searchTerm);
+    const matchesSearch =
+      report.name.toLowerCase().includes(searchTerm) ||
+      report.createdBy.toLowerCase().includes(searchTerm) ||
+      report.type.toLowerCase().includes(searchTerm) ||
+      report.status.toLowerCase().includes(searchTerm);
 
-  const matchesStatus =
-    status === "All" || report.status === status;
+    const matchesStatus = status === "All" || report.status === status;
 
-  const matchesDateRange = isWithinDateRange(
-    report.date,
-    dateRange
-  );
+    const matchesDateRange = isWithinDateRange(report.date, dateRange);
 
-  return (
-    matchesSearch &&
-    matchesStatus &&
-    matchesDateRange
-  );
-});
+    return matchesSearch && matchesStatus && matchesDateRange;
+  });
 
   const totalPages = Math.ceil(filteredReports.length / REPORTS_PER_PAGE);
 
@@ -119,7 +104,12 @@ function ReportsPage() {
           </p>
         </div>
 
-        <Button>Export Report</Button>
+        <Button
+          onClick={() => exportReports(filteredReports)}
+          disabled={filteredReports.length === 0}
+        >
+          Export Report
+        </Button>
       </header>
 
       <div className="space-y-6">

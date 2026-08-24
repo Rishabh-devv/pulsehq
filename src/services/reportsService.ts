@@ -5,7 +5,7 @@ const DEMO_REPORTS: Report[] = [
     id: 1,
     name: "Sales Q1",
     type: "PDF",
-    createdBy: "Pratigya (GF)",
+    createdBy: "Pratigya",
     date: "02 Aug 2026",
     status: "Completed",
   },
