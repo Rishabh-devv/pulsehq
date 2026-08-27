@@ -4,6 +4,8 @@ import SettingsActions from "../components/SettingsActions";
 import type { Profile } from "../types/profile";
 import Toast from "@/components/common/Toast";
 import AppearanceSection from "../components/AppearanceSection";
+import NotificationsSection from "../components/NotificationsSection";
+import type { NotificationPreferences } from "../types/notifications";
 
 const defaultProfile: Profile = {
   name: "Rishabh Soni",
@@ -12,10 +14,21 @@ const defaultProfile: Profile = {
   role: "Frontend Developer",
 };
 
+const defaultNotifications: NotificationPreferences = {
+  emailNotifications: true,
+  reportNotifications: true,
+  customerActivity: false,
+  weeklySummary: true,
+};
+
 function SettingsPage() {
   const [profile, setProfile] = useState<Profile>(defaultProfile);
   const [initialProfile, setInitialProfile] = useState<Profile>(defaultProfile);
   const [showToast, setShowToast] = useState(false);
+  const [notifications, setNotifications] =
+    useState<NotificationPreferences>(defaultNotifications);
+  const [initialNotifications, setInitialNotifications] =
+    useState<NotificationPreferences>(defaultNotifications);
 
   const updateProfile = (field: keyof Profile, value: string) => {
     setProfile((previousProfile) => ({
@@ -24,17 +37,21 @@ function SettingsPage() {
     }));
   };
 
-  const isDirty = JSON.stringify(profile) !== JSON.stringify(initialProfile);
+  const isDirty =
+    JSON.stringify(profile) !== JSON.stringify(initialProfile) ||
+    JSON.stringify(notifications) !== JSON.stringify(initialNotifications);
 
   const handleCancel = () => {
     setProfile(initialProfile);
+    setNotifications(initialNotifications);
   };
   const handleSave = () => {
     if (!isDirty) return;
+
     setInitialProfile(profile);
+    setInitialNotifications(notifications);
     setShowToast(true);
   };
-
   useEffect(() => {
     if (!showToast) return;
 
@@ -63,7 +80,10 @@ function SettingsPage() {
         </section>
 
         <section className="rounded-xl bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-semibold">Notifications</h2>
+          <NotificationsSection
+            notifications={notifications}
+            setNotifications={setNotifications}
+          />
         </section>
 
         <SettingsActions
