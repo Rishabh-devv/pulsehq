@@ -1,23 +1,28 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "@/components/layout/Sidebar";
 import Navbar from "@/components/layout/Navbar";
-import { useState } from "react";
+import { useTheme } from "@/context/ThemeContext";
 
 function AppLayout() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme((previousTheme) =>
-    previousTheme === "light" ? "dark" : "light"
-  )};
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
-    <div className={`flex h-screen ${theme==="light"? "bg-slate-100":"bg-slate-900"}`}>
-      <Sidebar theme={theme}/>
+    <div
+      className={`flex h-screen ${
+        resolvedTheme === "light"
+          ? "bg-slate-100"
+          : "bg-slate-900"
+      }`}
+    >
+      <Sidebar theme={resolvedTheme} />
 
       <div className="flex flex-1 flex-col overflow-hidden">
         <Navbar
-          theme={theme}
+          theme={resolvedTheme}
           toggleTheme={toggleTheme}
         />
 

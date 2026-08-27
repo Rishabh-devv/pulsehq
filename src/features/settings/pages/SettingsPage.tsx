@@ -3,6 +3,7 @@ import ProfileSection from "../components/ProfileSection";
 import SettingsActions from "../components/SettingsActions";
 import type { Profile } from "../types/profile";
 import Toast from "@/components/common/Toast";
+import AppearanceSection from "../components/AppearanceSection";
 
 const defaultProfile: Profile = {
   name: "Rishabh Soni",
@@ -58,7 +59,7 @@ function SettingsPage() {
         </section>
 
         <section className="rounded-xl bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-semibold">Appearance</h2>
+          <AppearanceSection />
         </section>
 
         <section className="rounded-xl bg-white p-6 shadow-sm">
