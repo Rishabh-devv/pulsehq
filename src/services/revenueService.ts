@@ -1,24 +1,14 @@
-import type {
-  RevenueChartData,
-  RevenueStat,
-} from "@/features/revenue/types/revenue";
+import type { RevenueOverview, RevenueData } from "@/types/revenue";
 
-const DEMO_REVENUE: RevenueStat = {
-  value: "$52,430",
-  change: "+12%",
+const DEMO_REVENUE_OVERVIEW: RevenueOverview = {
+  totalRevenue: 52430,
+  monthlyRevenue: 26000,
+  averageOrderValue: 125,
+  growth: 12,
+  customers: 1245,
+  customerGrowth: 8,
 };
-
-const DEMO_CUSTOMERS: RevenueStat = {
-  value: "1,245",
-  change: "+8%",
-};
-
-const DEMO_GROWTH: RevenueStat = {
-  value: "18%",
-  change: "+2%",
-};
-
-const DEMO_REVENUE_DATA: RevenueChartData[] = [
+const DEMO_REVENUE_DATA: RevenueData[] = [
   { month: "Jan", revenue: 12000 },
   { month: "Feb", revenue: 15000 },
   { month: "Mar", revenue: 18000 },
@@ -29,19 +19,13 @@ const DEMO_REVENUE_DATA: RevenueChartData[] = [
 
 export const revenueService = {
   async getRevenueData(): Promise<{
-    revenue: RevenueStat;
-    customers: RevenueStat;
-    growth: RevenueStat;
-    chartData: RevenueChartData[];
+    overview: RevenueOverview;
+    chartData: RevenueData[];
   }> {
-    await new Promise((resolve) =>
-      setTimeout(resolve, 1000)
-    );
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     return {
-      revenue: DEMO_REVENUE,
-      customers: DEMO_CUSTOMERS,
-      growth: DEMO_GROWTH,
+      overview: DEMO_REVENUE_OVERVIEW,
       chartData: DEMO_REVENUE_DATA,
     };
   },

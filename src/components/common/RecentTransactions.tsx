@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { dashboardService } from "@/services/dashboardService";
-import type { Transaction } from "@/types/Dashboard";
+import type { Transaction } from "@/types/dashboard";
 import { formatDate } from "@/utils/date";
 
 function RecentTransactions() {
@@ -47,7 +47,7 @@ function RecentTransactions() {
         </thead>
 
         <tbody>
-          {data.map((transaction: Transaction) => (
+          {(data ?? []).map((transaction: Transaction) => (
             <tr key={transaction.id} className="border-b last:border-none">
               <td className="py-4">{transaction.customer}</td>
               <td className="py-4">

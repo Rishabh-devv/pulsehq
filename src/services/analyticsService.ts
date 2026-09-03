@@ -2,7 +2,7 @@ import type {
   AnalyticsOverview,
   TrafficSource,
   TrafficData,
-} from "@/types/Analytics";
+} from "@/types/analytics";
 
 const DEMO_ANALYTICS_OVERVIEW: AnalyticsOverview = {
   revenue: 245000,

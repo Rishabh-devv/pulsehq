@@ -1,6 +1,6 @@
 import StatCard from "@/components/common/StatCard";
-import RevenueChart from "./components/RevenueChart";
-import RecentTransactions from "../../components/common/RecentTransactions";
+import RevenueChart from "../components/RevenueChart";
+import RecentTransactions from "@/components/common/RecentTransactions";
 import SkeletonCard from "@/components/common/SkeletonCard";
 import { useQuery } from "@tanstack/react-query";
 import { dashboardService } from "@/services/dashboardService";

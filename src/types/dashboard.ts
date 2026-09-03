@@ -13,7 +13,3 @@ export type Transaction = {
   status: "Completed" | "Pending" | "Failed";
 };
 
-export type RevenueData = {
-  month: string;
-  revenue: number;
-};

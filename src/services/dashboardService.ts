@@ -1,4 +1,5 @@
-import type { DashboardStats, Transaction, RevenueData } from "@/types/Dashboard";
+import type { DashboardStats, Transaction } from "@/types/dashboard";
+import type { RevenueData } from "@/types/revenue";
 
 const DEMO_DASHBOARD_STATS: DashboardStats = {
   revenue: 245000,

@@ -1,4 +1,4 @@
-import type { Report } from "@/types/Report";
+import type { Report } from "@/types/report";
 import StatusBadge from "@/components/common/StatusBadge";
 import { Download } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";

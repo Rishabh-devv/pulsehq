@@ -40,6 +40,9 @@ function AnalyticsStats() {
       </p>
     );
   }
+  if (!data) {
+  return null;
+}
 
   const analyticsMetrics = [
     {

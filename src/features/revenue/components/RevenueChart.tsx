@@ -1,6 +1,6 @@
-import type { RevenueChartProps } from "../types/revenue";
 import RevenueChartTooltip from "./RevenueChartTooltip";
-import { formatCurrency } from "@/utils/formatCurrency";
+import { formatCompactCurrency } from "@/utils/formatCurrency";
+import type { RevenueData } from "@/types/revenue";
 
 import {
   ResponsiveContainer,
@@ -11,6 +11,10 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
+
+interface RevenueChartProps {
+  data: RevenueData[];
+}
 
 function RevenueChart({ data }: RevenueChartProps) {
   return (
@@ -44,7 +48,7 @@ function RevenueChart({ data }: RevenueChartProps) {
           />
 
           <YAxis
-            tickFormatter={formatCurrency}
+            tickFormatter={formatCompactCurrency}
             tickLine={false}
             axisLine={false}
             tick={{ fill: "#6B7280", fontSize: 14 }}

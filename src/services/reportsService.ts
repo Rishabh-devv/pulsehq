@@ -1,4 +1,4 @@
-import type { Report } from "@/types/Report";
+import type { Report } from "@/types/report";
 
 const DEMO_REPORTS: Report[] = [
   {

@@ -1,4 +1,4 @@
-import type { Customer } from "@/types/Customer";
+import type { Customer } from "@/types/customer";
 
 const DEMO_CUSTOMERS: Customer[] = [ {
         id: "cust_001",

@@ -1,4 +1,4 @@
-import { Bell, Search, User } from "lucide-react";
+import { Bell, Search } from "lucide-react";
 import ThemeToggle from "../common/ThemeToggle";
 
 type NavbarProps = {

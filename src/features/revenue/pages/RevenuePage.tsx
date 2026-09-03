@@ -3,6 +3,7 @@ import RecentTransactions from "@/components/common/RecentTransactions";
 import RevenueCards from "../components/RevenueCards";
 import RevenueChart from "../components/RevenueChart";
 import { revenueService } from "@/services/revenueService";
+import { formatCurrency } from "@/utils/formatCurrency";
 
 function RevenuePage() {
   const { data, isLoading, error } = useQuery({
@@ -30,9 +31,18 @@ function RevenuePage() {
 
       <div className="space-y-6">
         <RevenueCards
-          revenue={data?.revenue ?? { value: "", change: "" }}
-          customers={data?.customers ?? { value: "", change: "" }}
-          growth={data?.growth ?? { value: "", change: "" }}
+          revenue={{
+           value: data ? formatCurrency(data.overview.totalRevenue) : "",
+            change: data ? `+${data.overview.growth}%` : "",
+          }}
+          customers={{
+            value: data ? data.overview.customers.toLocaleString() : "",
+            change: data ? `+${data.overview.customerGrowth}%` : "",
+          }}
+          growth={{
+            value: data ? `${data.overview.growth}%` : "",
+            change: `+${data?.overview.growth}%`,
+          }}
           isLoading={isLoading}
         />
         {data && <RevenueChart data={data.chartData} />}

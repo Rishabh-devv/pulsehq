@@ -1,4 +1,4 @@
-import type { Report } from "@/types/Report";
+import type { Report } from "@/types/report";
 
 export function downloadReport(report: Report) {
   const content = `

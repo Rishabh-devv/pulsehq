@@ -1,4 +1,4 @@
-import type { Report } from "@/types/Report";
+import type { Report } from "@/types/report";
 
 export function exportReports(reports: Report[]) {
   if (reports.length === 0) {

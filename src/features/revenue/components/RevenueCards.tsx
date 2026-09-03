@@ -1,7 +1,18 @@
 import StatCard from "@/components/common/StatCard";
-import type { RevenueCardsProps } from "../types/revenue";
 import { DollarSign, Users, TrendingUp } from "lucide-react";
 import SkeletonCard from "@/components/common/SkeletonCard";
+
+interface RevenueCardsProps {
+  revenue: RevenueStat;
+  customers: RevenueStat;
+  growth: RevenueStat;
+}
+
+interface RevenueStat {
+  value: string;
+  change: string;
+}
+
 interface RevenueCardsPropsWithLoading extends RevenueCardsProps {
   isLoading: boolean;
 }

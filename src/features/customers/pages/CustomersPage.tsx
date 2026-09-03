@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { customerService } from "@/services/customerService";
 import TableSkeleton from "@/components/common/TableSkeleton";
 import CustomerFilters from "../components/CustomerFilters";
-import type { Customer } from "@/types/Customer";
+import type { Customer } from "@/types/customer";
 
 function CustomersPage() {
   // State
