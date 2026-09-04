@@ -9,7 +9,7 @@ import {
   User,
   Users,
 } from "lucide-react";
-import { NavLink,useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
 type SidebarLink = {
@@ -60,9 +60,9 @@ function Sidebar({ theme }: SidebarProps) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-  logout();
-  navigate("/login");
-};
+    logout();
+    navigate("/login");
+  };
   return (
     <aside
       className={`flex h-screen w-64 shrink-0  flex-col border-r p-4 transition-colors ${
@@ -126,7 +126,13 @@ function Sidebar({ theme }: SidebarProps) {
         }`}
       >
         <div className="mb-4 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
+          <div
+            className={`flex h-10 w-10 items-center justify-center rounded-full ${
+              theme === "light"
+                ? "bg-gray-200 text-gray-600"
+                : "bg-slate-700 text-gray-300"
+            }`}
+          >
             <User size={20} />
           </div>
 

@@ -47,12 +47,12 @@ const DEMO_TRANSACTIONS: Transaction[] = [
 ];
 
 const DEMO_REVENUE_DATA: RevenueData[] = [
-  { month: "Jan", revenue: 20000 },
-  { month: "Feb", revenue: 25000 },
-  { month: "Mar", revenue: 30000 },
-  { month: "Apr", revenue: 35000 },
-  { month: "May", revenue: 40000 },
-  { month: "Jun", revenue: 45000 },
+  { month: "Jan", revenue: 18000 },
+  { month: "Feb", revenue: 50000 },
+  { month: "Mar", revenue: 20000 },
+  { month: "Apr", revenue: 60000 },
+  { month: "May", revenue: 25000 },
+  { month: "Jun", revenue: 72000 },
 ];
 
 export const dashboardService = {

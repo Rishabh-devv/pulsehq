@@ -13,18 +13,13 @@ function AppLayout() {
   return (
     <div
       className={`flex h-screen ${
-        resolvedTheme === "light"
-          ? "bg-slate-100"
-          : "bg-slate-900"
-      }`}
+        resolvedTheme === "light" ? "bg-slate-100" : "bg-slate-900"
+      } transition-colors duration-200`}
     >
       <Sidebar theme={resolvedTheme} />
 
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Navbar
-          theme={resolvedTheme}
-          toggleTheme={toggleTheme}
-        />
+        <Navbar theme={resolvedTheme} toggleTheme={toggleTheme} />
 
         <main className="flex-1 overflow-y-auto p-6">
           <Outlet />

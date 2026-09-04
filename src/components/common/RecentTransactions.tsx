@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { dashboardService } from "@/services/dashboardService";
 import type { Transaction } from "@/types/dashboard";
 import { formatDate } from "@/utils/date";
+import { CheckCircle2, Clock3, XCircle } from "lucide-react";
 
 function RecentTransactions() {
   const { data, isLoading, error } = useQuery({
@@ -10,13 +11,28 @@ function RecentTransactions() {
   });
 
   if (isLoading) {
-     return (
-      <div className="rounded-xl bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold">
-          Revenue Transactions
-        </h2>
-        <div className="mt-4 flex h-80 items-center justify-center animate-pulse rounded-lg bg-gray-100">
-          <p className="text-gray-500">Loading transactions...</p>
+    return (
+      <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div className="h-6 w-48 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+
+        <div className="mt-6 space-y-4">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between"
+            >
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 animate-pulse rounded-full bg-gray-200 dark:bg-gray-700" />
+
+                <div>
+                  <div className="h-4 w-28 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+                  <div className="mt-2 h-3 w-20 animate-pulse rounded bg-gray-100 dark:bg-gray-700" />
+                </div>
+              </div>
+
+              <div className="h-4 w-16 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -24,57 +40,105 @@ function RecentTransactions() {
 
   if (error) {
     return (
-      <p>{error instanceof Error ? error.message : "Something went wrong"}</p>
+      <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+          Recent Transactions
+        </h2>
+
+        <div className="mt-6 flex h-64 items-center justify-center">
+          <p className="text-sm text-red-500">
+            {error instanceof Error
+              ? error.message
+              : "Something went wrong"}
+          </p>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
-      <header className="mb-4">
-        <h2 className="text-xl font-semibold">Recent Transactions</h2>
+    <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+      {/* Header */}
+      <header className="mb-6 flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Recent Transactions
+          </h2>
+
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            Latest customer activity
+          </p>
+        </div>
+
+        <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+          {data?.length ?? 0} transactions
+        </span>
       </header>
 
-      <table className="w-full">
-        <thead>
-          <tr className="border-b text-left">
-            <th className="pb-3 text-sm font-medium text-gray-500">Customer</th>
-            <th className="pb-3 text-sm font-medium text-gray-500">Status</th>
+      {/* Transactions */}
+      <div className="space-y-1">
+        {(data ?? []).map((transaction: Transaction) => {
+          const statusConfig = {
+            Completed: {
+              icon: CheckCircle2,
+              classes:
+                "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-400",
+            },
+            Pending: {
+              icon: Clock3,
+              classes:
+                "bg-yellow-50 text-yellow-700 dark:bg-yellow-950 dark:text-yellow-400",
+            },
+            Failed: {
+              icon: XCircle,
+              classes:
+                "bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-400",
+            },
+          };
 
-            <th className="pb-3 text-sm font-medium text-gray-500">Amount</th>
+          const status = statusConfig[transaction.status];
+          const StatusIcon = status.icon;
 
-            <th className="pb-3 text-sm font-medium text-gray-500">Date</th>
-          </tr>
-        </thead>
+          return (
+            <div
+              key={transaction.id}
+              className="flex items-center justify-between rounded-xl px-2 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/50"
+            >
+              <div className="flex min-w-0 items-center gap-3">
+                {/* Avatar */}
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-semibold text-blue-600 dark:bg-blue-950 dark:text-blue-400">
+                  {transaction.customer.charAt(0).toUpperCase()}
+                </div>
 
-        <tbody>
-          {(data ?? []).map((transaction: Transaction) => (
-            <tr key={transaction.id} className="border-b last:border-none">
-              <td className="py-4">{transaction.customer}</td>
-              <td className="py-4">
-                <span
-                  className={`rounded-full px-2 py-1 text-xs font-medium ${
-                    transaction.status === "Completed"
-                      ? "bg-green-100 text-green-700"
-                      : transaction.status === "Failed"
-                      ? "bg-red-100 text-red-700"
-                      : "bg-yellow-100 text-yellow-700"
-                  }`}
-                >
-                  {transaction.status}
-                </span>
-              </td>
+                {/* Customer */}
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                    {transaction.customer}
+                  </p>
 
-              <td className="py-4 font-medium">
+                  <div className="mt-1 flex items-center gap-2">
+                    <span
+                      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${status.classes}`}
+                    >
+                      <StatusIcon size={12} />
+                      {transaction.status}
+                    </span>
+
+                    <span className="text-xs text-gray-400">
+                      {formatDate(transaction.date)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Amount */}
+              <p className="ml-4 shrink-0 text-sm font-semibold text-gray-900 dark:text-white">
                 ${transaction.amount.toLocaleString()}
-              </td>
-
-              <td className="py-4 text-gray-500">
-                {formatDate(transaction.date)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
