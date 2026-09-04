@@ -17,10 +17,7 @@ function RecentTransactions() {
 
         <div className="mt-6 space-y-4">
           {Array.from({ length: 5 }).map((_, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between"
-            >
+            <div key={index} className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 animate-pulse rounded-full bg-gray-200 dark:bg-gray-700" />
 
@@ -47,9 +44,7 @@ function RecentTransactions() {
 
         <div className="mt-6 flex h-64 items-center justify-center">
           <p className="text-sm text-red-500">
-            {error instanceof Error
-              ? error.message
-              : "Something went wrong"}
+            {error instanceof Error ? error.message : "Something went wrong"}
           </p>
         </div>
       </div>
@@ -70,9 +65,9 @@ function RecentTransactions() {
           </p>
         </div>
 
-        <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+        <div className="rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-600 dark:border-gray-600 dark:text-gray-300">
           {data?.length ?? 0} transactions
-        </span>
+        </div>
       </header>
 
       {/* Transactions */}

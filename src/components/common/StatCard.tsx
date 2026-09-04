@@ -5,9 +5,16 @@ type StatCardProps = {
   value: string;
   change: string;
   icon: LucideIcon;
+  changeDirection?: "up" | "down";
 };
 
-function StatCard({ title, value, change, icon: Icon }: StatCardProps) {
+function StatCard({
+  title,
+  value,
+  change,
+  icon: Icon,
+  changeDirection = "up",
+}: StatCardProps) {
   return (
     <div className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-100 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600">
       <header className="flex items-start justify-between">
@@ -31,8 +38,10 @@ function StatCard({ title, value, change, icon: Icon }: StatCardProps) {
       </header>
 
       <footer className="mt-4 flex items-center gap-1 text-sm font-medium text-green-600 dark:text-green-400">
-        <span>↑</span>
+        <span>{changeDirection === "up" ? "↑" : "↓"}</span>
+
         <span>{change}</span>
+
         <span className="font-normal text-gray-500 dark:text-gray-400">
           from last month
         </span>

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { analyticsService } from "@/services/analyticsService";
 
 function TrafficSources() {
@@ -13,29 +14,26 @@ function TrafficSources() {
 
   if (isLoading) {
     return (
-      <div className="rounded-xl bg-white p-6 shadow-sm">
-        <h2 className="mb-6 text-lg font-semibold">
-          Top Traffic Sources
-        </h2>
+      <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 dark:border-gray-700 dark:bg-gray-800">
+        <div className="animate-pulse">
+          <div className="h-5 w-44 rounded bg-gray-200 dark:bg-gray-700" />
 
-        <div className="space-y-4">
-          {[1, 2, 3, 4, 5].map((item) => (
-            <div
-              key={item}
-              className="flex animate-pulse items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <div className="h-3 w-3 rounded-full bg-gray-200" />
+          <div className="mt-2 h-4 w-52 rounded bg-gray-200 dark:bg-gray-700" />
 
-                <div className="h-4 w-24 rounded bg-gray-200" />
+          <div className="mt-6 space-y-6">
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <div key={item}>
+                <div className="flex items-center justify-between">
+                  <div className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-700" />
+                  <div className="h-4 w-16 rounded bg-gray-200 dark:bg-gray-700" />
+                </div>
+
+                <div className="mt-3 h-2 rounded-full bg-gray-100 dark:bg-gray-700">
+                  <div className="h-2 w-1/2 rounded-full bg-gray-200 dark:bg-gray-600" />
+                </div>
               </div>
-
-              <div className="space-y-1 text-right">
-                <div className="ml-auto h-4 w-12 rounded bg-gray-200" />
-                <div className="ml-auto h-3 w-8 rounded bg-gray-200" />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -43,65 +41,72 @@ function TrafficSources() {
 
   if (error) {
     return (
-      <div className="rounded-xl bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold">
+      <div className="h-full rounded-2xl border border-red-200 bg-red-50 p-6 shadow-sm dark:border-red-900 dark:bg-red-950/30">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
           Top Traffic Sources
         </h2>
 
-        <p className="text-red-500">
+        <p className="mt-2 text-sm text-red-600 dark:text-red-400">
           {error instanceof Error
             ? error.message
-            : "Something went wrong"}
+            : "Something went wrong while loading traffic sources."}
         </p>
       </div>
     );
   }
 
-  const colors = [
-    "bg-blue-500",
-    "bg-green-500",
-    "bg-yellow-500",
-    "bg-red-500",
-    "bg-purple-500",
-    "bg-pink-500",
-  ];
-
   return (
-    <div className="rounded-xl bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-lg font-semibold">
-        Top Traffic Sources
-      </h2>
+    <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+      {/* Header */}
+      <header>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Top Traffic Sources
+            </h2>
 
-      <div className="space-y-4">
-        {trafficSources.map((source, index) => (
-          <div
-            key={source.sourceName}
-            className="flex items-center justify-between border-b border-gray-100 pb-3 last:border-b-0"
-          >
-            {/* Left Section */}
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              Where your visitors are coming from.
+            </p>
+          </div>
 
-            <div className="flex items-center gap-3">
-              <div
-                className={`h-3 w-3 rounded-full ${
-                  colors[index % colors.length]
-                }`}
-              />
+          <div className="shrink-0 rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-600 dark:border-gray-600 dark:text-gray-300">
+            {trafficSources.length} sources
+          </div>
+        </div>
+      </header>
 
-              <p className="font-medium text-gray-900">
-                {source.sourceName}
-              </p>
+      {/* Sources */}
+      <div className="mt-6 space-y-5">
+        {trafficSources.map((source) => (
+          <div key={source.sourceName}>
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="h-2.5 w-2.5 shrink-0 rounded-full bg-blue-500" />
+
+                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                  {source.sourceName}
+                </p>
+              </div>
+
+              <div className="flex shrink-0 items-center gap-3">
+                <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                  {source.visitors.toLocaleString()}
+                </p>
+
+                <p className="w-10 text-right text-sm text-gray-500 dark:text-gray-400">
+                  {source.percentage}%
+                </p>
+              </div>
             </div>
 
-            {/* Right Section */}
-
-            <div className="text-right">
-              <p className="font-semibold text-gray-900">
-                {source.visitors.toLocaleString()}
-              </p>
-
-              <p className="text-sm text-gray-500">
-                {source.percentage}%
-              </p>
+            <div className="mt-2.5 h-2 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
+              <div
+                className="h-full rounded-full bg-blue-500 transition-all duration-500"
+                style={{
+                  width: `${Math.min(source.percentage, 100)}%`,
+                }}
+              />
             </div>
           </div>
         ))}

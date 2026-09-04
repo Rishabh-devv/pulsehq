@@ -2,26 +2,34 @@ import AnalyticsStats from "../components/AnalyticsStats";
 import TrafficChart from "../components/TrafficChart";
 import TrafficSources from "../components/TrafficSources";
 
-
 function AnalyticsPage() {
   return (
-    <>
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold">Analytics</h1>
-        <p className="mt-2 text-gray-500">
+    <div className="space-y-8">
+      {/* Page Header */}
+      <header>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Analytics
+        </h1>
+
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
           Analyze your business performance and key metrics.
         </p>
       </header>
 
-      <div className="space-y-6">
-    <AnalyticsStats />
+      {/* Analytics Stats */}
+      <AnalyticsStats />
 
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <TrafficChart />
-      <TrafficSources />
+      {/* Traffic Analytics */}
+      <section className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+        <div className="min-w-0">
+          <TrafficChart />
+        </div>
+
+        <div className="min-w-0">
+          <TrafficSources />
+        </div>
+      </section>
     </div>
-  </div>
-    </>
   );
 }
 
