@@ -1,9 +1,12 @@
+import { Download, FileText } from "lucide-react";
+
 import type { Report } from "@/types/report";
+
 import StatusBadge from "@/components/common/StatusBadge";
-import { Download } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
-import { FileText } from "lucide-react";
+
 import { downloadReport } from "@/utils/downloadReport";
+import { formatReportDate } from "@/utils/date";
 
 interface ReportsTableProps {
   reports: Report[];
@@ -21,63 +24,92 @@ function ReportsTable({ reports }: ReportsTableProps) {
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-      <table className="min-w-full">
-        <thead className="border-b border-gray-200 bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-              Report Name
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-              Type
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-              Created By
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-              Date
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-              Status
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-              Action
-            </th>
-          </tr>
-        </thead>
+    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+      <div className="overflow-x-auto">
+        <table className="min-w-full">
+          <thead className="border-b border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900/40">
+            <tr>
+              <th className="whitespace-nowrap px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                Report Name
+              </th>
 
-        <tbody>
-          {reports.map((report) => (
-            <tr
-              key={report.id}
-              className="border-b border-gray-100 hover:bg-gray-50"
-            >
-              <td className="px-6 py-4">{report.name}</td>
+              <th className="whitespace-nowrap px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                Type
+              </th>
 
-              <td className="px-6 py-4">{report.type}</td>
+              <th className="whitespace-nowrap px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                Created By
+              </th>
 
-              <td className="px-6 py-4">{report.createdBy}</td>
+              <th className="whitespace-nowrap px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                Date
+              </th>
 
-              <td className="px-6 py-4">{report.date}</td>
+              <th className="whitespace-nowrap px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                Status
+              </th>
 
-              <td className="px-6 py-4">
-                <StatusBadge status={report.status} />
-              </td>
-
-              <td className="px-6 py-4">
-                <button
-                  type="button"
-                  onClick={() => downloadReport(report)}
-                  className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50 hover:text-blue-700"
-                >
-                  <Download size={16} />
-                  Download
-                </button>
-              </td>
+              <th className="whitespace-nowrap px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                Action
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+            {reports.map((report) => (
+              <tr
+                key={report.id}
+                className="transition-colors duration-150 hover:bg-gray-50 dark:hover:bg-gray-700/40"
+              >
+                <td className="whitespace-nowrap px-6 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400">
+                      <FileText size={17} />
+                    </div>
+
+                    <span className="text-sm font-medium text-gray-900 dark:text-white">
+                      {report.name}
+                    </span>
+                  </div>
+                </td>
+
+                <td className="whitespace-nowrap px-6 py-4">
+                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                    {report.type}
+                  </span>
+                </td>
+
+                <td className="whitespace-nowrap px-6 py-4">
+                  <span className="text-sm text-gray-600 dark:text-gray-300">
+                    {report.createdBy}
+                  </span>
+                </td>
+
+                <td className="whitespace-nowrap px-6 py-4">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    {formatReportDate(report.date)}
+                  </span>
+                </td>
+
+                <td className="whitespace-nowrap px-6 py-4">
+                  <StatusBadge status={report.status} />
+                </td>
+
+                <td className="whitespace-nowrap px-6 py-4">
+                  <button
+                    type="button"
+                    onClick={() => downloadReport(report)}
+                    className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-blue-600 transition-colors duration-150 hover:bg-blue-50 hover:text-blue-700 dark:text-blue-400 dark:hover:bg-blue-950 dark:hover:text-blue-300"
+                  >
+                    <Download size={16} />
+                    Download
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

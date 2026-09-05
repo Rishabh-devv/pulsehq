@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+
 import ReportFilters from "../components/ReportFilters";
 import ReportsTable from "../components/ReportsTable";
+
 import Pagination from "@/components/common/Pagination";
 import Button from "@/components/common/Button";
+import ReportsTableSkeleton from "../components/ReportsTableSkeleton";
+
 import { reportsService } from "@/services/reportsService";
-import TableSkeleton from "@/components/common/TableSkeleton";
 import { exportReports } from "@/utils/exportReports";
 
 const REPORTS_PER_PAGE = 5;
+
 function isWithinDateRange(reportDate: string, dateRange: string): boolean {
   const reportDateObject = new Date(reportDate);
   const today = new Date();
 
-  // Remove the time portion so we compare dates only
   today.setHours(0, 0, 0, 0);
   reportDateObject.setHours(0, 0, 0, 0);
 
@@ -58,16 +61,8 @@ function ReportsPage() {
     setCurrentPage(1);
   }, [search, status, dateRange]);
 
-  if (error) {
-    return (
-      <p className="text-red-500">
-        {error instanceof Error ? error.message : "Something went wrong"}
-      </p>
-    );
-  }
-
   const filteredReports = reports.filter((report) => {
-    const searchTerm = search.toLowerCase();
+    const searchTerm = search.toLowerCase().trim();
 
     const matchesSearch =
       report.name.toLowerCase().includes(searchTerm) ||
@@ -93,20 +88,38 @@ function ReportsPage() {
     indexOfLastReport
   );
 
+  if (error) {
+    return (
+      <div className="rounded-2xl border border-red-200 bg-red-50 p-6 dark:border-red-900 dark:bg-red-950/30">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+          Reports
+        </h2>
+
+        <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+          {error instanceof Error
+            ? error.message
+            : "Something went wrong while loading reports."}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <>
-      <header className="mb-8 flex items-start justify-between">
+      <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Reports</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+            Reports
+          </h1>
 
-          <p className="mt-2 text-gray-500">
+          <p className="mt-2 text-gray-500 dark:text-gray-400">
             Generate, filter and download reports.
           </p>
         </div>
 
         <Button
           onClick={() => exportReports(filteredReports)}
-          disabled={filteredReports.length === 0}
+          disabled={isLoading || filteredReports.length === 0}
         >
           Export Report
         </Button>
@@ -123,7 +136,7 @@ function ReportsPage() {
         />
 
         {isLoading ? (
-          <TableSkeleton rows={5} columns={6} />
+          <ReportsTableSkeleton />
         ) : (
           <>
             <ReportsTable reports={currentReports} />

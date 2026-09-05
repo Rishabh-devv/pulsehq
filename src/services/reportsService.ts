@@ -6,7 +6,7 @@ const DEMO_REPORTS: Report[] = [
     name: "Sales Q1",
     type: "PDF",
     createdBy: "Pratigya",
-    date: "02 Aug 2026",
+    date: "2026-08-02",
     status: "Completed",
   },
   {
@@ -14,7 +14,7 @@ const DEMO_REPORTS: Report[] = [
     name: "Sales Q2",
     type: "PDF",
     createdBy: "Sharma",
-    date: "06 Aug 2026",
+    date: "2026-08-06",
     status: "Completed",
   },
   {
@@ -22,7 +22,7 @@ const DEMO_REPORTS: Report[] = [
     name: "Sales Q3",
     type: "PDF",
     createdBy: "Ashish",
-    date: "10 Aug 2026",
+    date: "2026-08-10",
     status: "Completed",
   },
   {
@@ -30,7 +30,7 @@ const DEMO_REPORTS: Report[] = [
     name: "Sales Q4",
     type: "PDF",
     createdBy: "Rishabh",
-    date: "15 Aug 2026",
+    date: "2026-08-15",
     status: "Completed",
   },
   {
@@ -38,7 +38,7 @@ const DEMO_REPORTS: Report[] = [
     name: "Sales Q5",
     type: "PDF",
     createdBy: "User",
-    date: "19 Aug 2026",
+    date: "2026-08-19",
     status: "Failed",
   },
   {
@@ -46,7 +46,7 @@ const DEMO_REPORTS: Report[] = [
     name: "Sales Q6",
     type: "PDF",
     createdBy: "Pratigya",
-    date: "22 Aug 2026",
+    date: "2026-08-22",
     status: "Pending",
   },
 ];
