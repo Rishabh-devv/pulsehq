@@ -1,19 +1,15 @@
+import Button from "@/components/common/Button";
+
 interface SettingsActionsProps {
   isDirty: boolean;
   onCancel: () => void;
   onSave: () => void;
 }
 
-import Button from "@/components/common/Button";
-
-export default function SettingsActions({
-  isDirty,
-  onCancel,
-  onSave,
-}: SettingsActionsProps) {
+function SettingsActions({ isDirty, onCancel, onSave }: SettingsActionsProps) {
   return (
-    <div className="mt-6 flex justify-end gap-3">
-      <Button variant="secondary" onClick={onCancel}>
+    <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <Button variant="secondary" onClick={onCancel} disabled={!isDirty}>
         Cancel
       </Button>
 
@@ -23,3 +19,5 @@ export default function SettingsActions({
     </div>
   );
 }
+
+export default SettingsActions;

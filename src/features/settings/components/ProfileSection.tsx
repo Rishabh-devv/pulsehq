@@ -9,10 +9,23 @@ interface ProfileSectionProps {
 function ProfileSection({ profile, updateProfile }: ProfileSectionProps) {
   return (
     <div>
-      <h2 className="mb-6 text-2xl font-semibold">Profile</h2>
-      <div className="my-6 border-b border-gray-200" />
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+        Profile
+      </h2>
 
-      <div className="max-w-lg space-y-6">
+      <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+        Manage your personal and professional information.
+      </p>
+
+      <div className="my-6 border-b border-gray-200 dark:border-gray-700" />
+
+      <div className="max-w-lg space-y-5">
+        <TextInput
+          label="Name"
+          placeholder="Enter your name"
+          value={profile.name}
+          onChange={(e) => updateProfile("name", e.target.value)}
+        />
         <TextInput
           label="Email"
           placeholder="Enter your email"

@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import ProfileSection from "../components/ProfileSection";
-import SettingsActions from "../components/SettingsActions";
-import type { Profile } from "../types/profile";
-import Toast from "@/components/common/Toast";
 import AppearanceSection from "../components/AppearanceSection";
 import NotificationsSection from "../components/NotificationsSection";
+import SettingsActions from "../components/SettingsActions";
+
+import type { Profile } from "../types/profile";
 import type { NotificationPreferences } from "../types/notifications";
+
+import Toast from "@/components/common/Toast";
 
 const defaultProfile: Profile = {
   name: "Rishabh Soni",
@@ -24,9 +27,12 @@ const defaultNotifications: NotificationPreferences = {
 function SettingsPage() {
   const [profile, setProfile] = useState<Profile>(defaultProfile);
   const [initialProfile, setInitialProfile] = useState<Profile>(defaultProfile);
+
   const [showToast, setShowToast] = useState(false);
+
   const [notifications, setNotifications] =
     useState<NotificationPreferences>(defaultNotifications);
+
   const [initialNotifications, setInitialNotifications] =
     useState<NotificationPreferences>(defaultNotifications);
 
@@ -45,6 +51,7 @@ function SettingsPage() {
     setProfile(initialProfile);
     setNotifications(initialNotifications);
   };
+
   const handleSave = () => {
     if (!isDirty) return;
 
@@ -52,6 +59,7 @@ function SettingsPage() {
     setInitialNotifications(notifications);
     setShowToast(true);
   };
+
   useEffect(() => {
     if (!showToast) return;
 
@@ -65,21 +73,25 @@ function SettingsPage() {
   return (
     <>
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">Settings</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Settings
+        </h1>
 
-        <p className="mt-2 text-gray-500">Manage your account preferences.</p>
+        <p className="mt-2 text-gray-500 dark:text-gray-400">
+          Manage your account preferences.
+        </p>
       </header>
 
       <div className="space-y-6">
-        <section className="rounded-xl bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
           <ProfileSection profile={profile} updateProfile={updateProfile} />
         </section>
 
-        <section className="rounded-xl bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
           <AppearanceSection />
         </section>
 
-        <section className="rounded-xl bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
           <NotificationsSection
             notifications={notifications}
             setNotifications={setNotifications}
@@ -91,12 +103,13 @@ function SettingsPage() {
           onCancel={handleCancel}
           onSave={handleSave}
         />
-        <Toast
-          message="Profile updated successfully!"
-          type="success"
-          isVisible={showToast}
-        />
       </div>
+
+      <Toast
+        message="Settings updated successfully!"
+        type="success"
+        isVisible={showToast}
+      />
     </>
   );
 }
