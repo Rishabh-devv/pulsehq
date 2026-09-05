@@ -64,8 +64,8 @@ function TrafficChart() {
     );
   }
 
-  const latestVisitors =
-    trafficData.length > 0 ? trafficData[trafficData.length - 1].visitors : 0;
+  // const latestVisitors =
+  //   trafficData.length > 0 ? trafficData[trafficData.length - 1].visitors : 0;
 
   return (
     <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
@@ -87,7 +87,7 @@ function TrafficChart() {
       </header>
 
       {/* Latest metric */}
-      <div className="mt-6">
+      {/* <div className="mt-6">
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Latest visitors
         </p>
@@ -95,7 +95,7 @@ function TrafficChart() {
         <p className="mt-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {latestVisitors.toLocaleString()}
         </p>
-      </div>
+      </div> */}
 
       {/* Chart */}
       <div className="mt-5 h-72 sm:h-80">

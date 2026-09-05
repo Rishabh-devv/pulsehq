@@ -1,11 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
+import { CheckCircle2, Clock3, XCircle } from "lucide-react";
+
 import { dashboardService } from "@/services/dashboardService";
 import type { Transaction } from "@/types/dashboard";
 import { formatDate } from "@/utils/date";
-import { CheckCircle2, Clock3, XCircle } from "lucide-react";
 
 function RecentTransactions() {
-  const { data, isLoading, error } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["dashboard", "transactions"],
     queryFn: dashboardService.getRecentTransactions,
   });
@@ -13,21 +18,33 @@ function RecentTransactions() {
   if (isLoading) {
     return (
       <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-        <div className="h-6 w-48 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+        <div className="flex items-start justify-between">
+          <div>
+            <div className="h-5 w-44 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
 
-        <div className="mt-6 space-y-4">
+            <div className="mt-2 h-4 w-36 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+          </div>
+
+          <div className="h-9 w-24 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
+        </div>
+
+        <div className="mt-6 space-y-2">
           {Array.from({ length: 5 }).map((_, index) => (
-            <div key={index} className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 animate-pulse rounded-full bg-gray-200 dark:bg-gray-700" />
+            <div
+              key={index}
+              className="flex items-center justify-between rounded-xl px-2 py-3"
+            >
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="h-10 w-10 shrink-0 animate-pulse rounded-full bg-gray-200 dark:bg-gray-700" />
 
-                <div>
+                <div className="min-w-0">
                   <div className="h-4 w-28 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
-                  <div className="mt-2 h-3 w-20 animate-pulse rounded bg-gray-100 dark:bg-gray-700" />
+
+                  <div className="mt-2 h-3 w-32 animate-pulse rounded bg-gray-100 dark:bg-gray-700" />
                 </div>
               </div>
 
-              <div className="h-4 w-16 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+              <div className="ml-4 h-4 w-16 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
             </div>
           ))}
         </div>
@@ -37,14 +54,16 @@ function RecentTransactions() {
 
   if (error) {
     return (
-      <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+      <div className="h-full rounded-2xl border border-red-200 bg-red-50 p-6 dark:border-red-900 dark:bg-red-950/30">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
           Recent Transactions
         </h2>
 
-        <div className="mt-6 flex h-64 items-center justify-center">
-          <p className="text-sm text-red-500">
-            {error instanceof Error ? error.message : "Something went wrong"}
+        <div className="mt-6 flex min-h-64 items-center justify-center">
+          <p className="text-sm text-red-600 dark:text-red-400">
+            {error instanceof Error
+              ? error.message
+              : "Something went wrong while loading transactions."}
           </p>
         </div>
       </div>
@@ -53,8 +72,7 @@ function RecentTransactions() {
 
   return (
     <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
-      {/* Header */}
-      <header className="mb-6 flex items-center justify-between">
+      <header className="mb-6 flex items-start justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Recent Transactions
@@ -65,14 +83,13 @@ function RecentTransactions() {
           </p>
         </div>
 
-        <div className="rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-600 dark:border-gray-600 dark:text-gray-300">
-          {data?.length ?? 0} transactions
+        <div className="shrink-0 rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-600 dark:border-gray-600 dark:text-gray-300">
+          {data.length} transactions
         </div>
       </header>
 
-      {/* Transactions */}
       <div className="space-y-1">
-        {(data ?? []).map((transaction: Transaction) => {
+        {data.map((transaction: Transaction) => {
           const statusConfig = {
             Completed: {
               icon: CheckCircle2,
@@ -97,15 +114,13 @@ function RecentTransactions() {
           return (
             <div
               key={transaction.id}
-              className="flex items-center justify-between rounded-xl px-2 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/50"
+              className="flex items-center justify-between rounded-xl px-2 py-3 transition-colors duration-150 hover:bg-gray-50 dark:hover:bg-gray-700/50"
             >
               <div className="flex min-w-0 items-center gap-3">
-                {/* Avatar */}
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-semibold text-blue-600 dark:bg-blue-950 dark:text-blue-400">
                   {transaction.customer.charAt(0).toUpperCase()}
                 </div>
 
-                {/* Customer */}
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
                     {transaction.customer}
@@ -119,14 +134,13 @@ function RecentTransactions() {
                       {transaction.status}
                     </span>
 
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-400 dark:text-gray-500">
                       {formatDate(transaction.date)}
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Amount */}
               <p className="ml-4 shrink-0 text-sm font-semibold text-gray-900 dark:text-white">
                 ${transaction.amount.toLocaleString()}
               </p>

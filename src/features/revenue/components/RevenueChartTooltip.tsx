@@ -18,11 +18,13 @@ function RevenueChartTooltip({
   }
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-lg">
-      <p className="text-sm text-gray-500">{label}</p>
+    <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-lg dark:border-gray-600 dark:bg-gray-800">
+      <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+        {label}
+      </p>
 
-      <p className="mt-2 font-semibold text-gray-900">
-        Revenue: {formatCurrency(payload[0].value)}
+      <p className="mt-1 text-sm font-semibold text-gray-900 dark:text-white">
+        {formatCurrency(payload[0].value)}
       </p>
     </div>
   );

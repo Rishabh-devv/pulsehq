@@ -17,7 +17,7 @@ function TableSkeleton({ rows = 5, columns = 7 }: TableSkeletonProps) {
         </div>
 
         <div className="mt-6 overflow-x-auto">
-          <table className="w-full min-w-[900px]">
+          <table className="w-full min-w-225">
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-700">
                 {Array.from({ length: columns }).map((_, index) => (

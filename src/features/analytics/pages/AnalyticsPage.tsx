@@ -5,7 +5,6 @@ import TrafficSources from "../components/TrafficSources";
 function AnalyticsPage() {
   return (
     <div className="space-y-8">
-      {/* Page Header */}
       <header>
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
           Analytics
@@ -16,16 +15,13 @@ function AnalyticsPage() {
         </p>
       </header>
 
-      {/* Analytics Stats */}
       <AnalyticsStats />
-
-      {/* Traffic Analytics */}
-      <section className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
-        <div className="min-w-0">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-stretch">
+        <div className="min-w-0 lg:col-span-2">
           <TrafficChart />
         </div>
 
-        <div className="min-w-0">
+        <div className="min-w-0 lg:col-span-1">
           <TrafficSources />
         </div>
       </section>

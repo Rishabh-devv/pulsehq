@@ -37,7 +37,7 @@ function CustomerTable({ customers, totalCustomers }: CustomerTableProps) {
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[900px]">
+        <table className="w-full min-w-225">
           <thead>
             <tr className="border-b border-gray-200 dark:border-gray-700">
               <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">

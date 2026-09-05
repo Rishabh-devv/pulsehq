@@ -51,7 +51,7 @@ function RevenueChart() {
     );
   }
 
-  const latestRevenue = data?.[data.length - 1]?.revenue ?? 0;
+  // const latestRevenue = data?.[data.length - 1]?.revenue ?? 0;
 
   return (
     <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
@@ -70,7 +70,7 @@ function RevenueChart() {
           Last 6 months
         </div>
       </header>
-      <div className="mt-6">
+      {/* <div className="mt-6">
         <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
           Latest revenue
         </p>
@@ -78,7 +78,7 @@ function RevenueChart() {
         <p className="mt-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {formatCurrency(latestRevenue)}
         </p>
-      </div>
+      </div> */}
       <section className="mt-6 h-80">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
