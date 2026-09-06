@@ -14,9 +14,7 @@ interface ThemeContextValue {
   setTheme: (theme: Theme) => void;
 }
 
-const ThemeContext = createContext<ThemeContextValue | undefined>(
-  undefined
-);
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -34,13 +32,10 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       return savedTheme;
     }
 
-    return "light";
+    return "system";
   });
 
-  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">(
-    "light"
-  );
-
+  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
   useEffect(() => {
     localStorage.setItem("theme", theme);
 
@@ -58,9 +53,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       return;
     }
 
-    const mediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
     const applySystemTheme = () => {
       if (mediaQuery.matches) {

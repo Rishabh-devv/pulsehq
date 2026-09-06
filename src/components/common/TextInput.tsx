@@ -20,11 +20,7 @@ function TextInput({
 
       <input
         {...inputProps}
-        className={`w-full rounded-lg border bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none transition-colors duration-200 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 ${
-          error
-            ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
-            : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:focus:border-blue-400"
-        } ${className ?? ""}`}
+        className={`w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-400 transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 ${className ?? ""}`}
       />
 
       {error && (
