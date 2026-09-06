@@ -29,12 +29,12 @@ function ReportFilters({
         />
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-wrap gap-3">
         <select
           value={status}
           onChange={(e) => onStatusChange(e.target.value)}
           aria-label="Filter by status"
-          className="h-10 rounded-lg border border-gray-200 bg-white px-3 text-sm font-medium text-gray-700 outline-none transition-colors hover:border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500 dark:focus:border-blue-500 dark:focus:ring-blue-950"
+          className="h-10 min-w-24 rounded-lg border border-gray-200 bg-white px-3 text-sm font-medium text-gray-700 outline-none transition-colors hover:border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500 dark:focus:border-blue-500 dark:focus:ring-blue-950"
         >
           <option value="All">All</option>
           <option value="Completed">Completed</option>
@@ -46,7 +46,7 @@ function ReportFilters({
           value={dateRange}
           onChange={(e) => onDateRangeChange(e.target.value)}
           aria-label="Filter by date range"
-          className="h-10 rounded-lg border border-gray-200 bg-white px-3 text-sm font-medium text-gray-700 outline-none transition-colors hover:border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500 dark:focus:border-blue-500 dark:focus:ring-blue-950"
+          className="h-10 min-w-30  rounded-lg border border-gray-200 bg-white px-3 text-sm font-medium text-gray-700 outline-none transition-colors hover:border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500 dark:focus:border-blue-500 dark:focus:ring-blue-950"
         >
           <option value="Last 7 Days">Last 7 Days</option>
           <option value="Last 30 Days">Last 30 Days</option>

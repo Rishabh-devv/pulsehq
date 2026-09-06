@@ -107,7 +107,7 @@ function ReportsPage() {
   return (
     <>
       <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
+        <div className="min-w-0">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             Reports
           </h1>
