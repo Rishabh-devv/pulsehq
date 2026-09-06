@@ -1,12 +1,13 @@
-import { Bell, Search } from "lucide-react";
+import { Bell, Search, Menu } from "lucide-react";
 import ThemeToggle from "../common/ThemeToggle";
 
 type NavbarProps = {
   theme: "light" | "dark";
   toggleTheme: () => void;
+  onMenuClick: () => void;
 };
 
-function Navbar({ theme, toggleTheme }: NavbarProps) {
+function Navbar({ theme, toggleTheme, onMenuClick }: NavbarProps) {
   return (
     <header
       className={`flex items-center justify-between border-b px-6 py-4 transition-colors duration-200 ${
@@ -15,7 +16,19 @@ function Navbar({ theme, toggleTheme }: NavbarProps) {
           : "border-gray-700 bg-slate-800"
       }`}
     >
-      <div className="flex-1 ">
+      <button
+        type="button"
+        aria-label="Open navigation"
+        onClick={onMenuClick}
+        className={`mr-3 rounded-lg p-2 transition-colors lg:hidden ${
+          theme === "light"
+            ? "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+            : "text-gray-300 hover:bg-slate-700 hover:text-white"
+        }`}
+      >
+        <Menu size={22} />
+      </button>
+      <div className="hidden flex-1 lg:block">
         <div className="relative w-full max-w-xl">
           <Search
             size={18}
@@ -76,7 +89,7 @@ function Navbar({ theme, toggleTheme }: NavbarProps) {
             RS
           </div>
 
-          <div>
+          <div className="hidden sm:block">
             <p
               className={`text-sm font-medium ${
                 theme === "light" ? "text-gray-900" : "text-white"

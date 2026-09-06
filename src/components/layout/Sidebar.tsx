@@ -8,6 +8,7 @@ import {
   Settings,
   User,
   Users,
+  X,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -20,6 +21,8 @@ type SidebarLink = {
 
 type SidebarProps = {
   theme: "light" | "dark";
+  isMobileMenuOpen: boolean;
+  onClose: () => void;
 };
 
 const sidebarLinks: SidebarLink[] = [
@@ -55,7 +58,7 @@ const sidebarLinks: SidebarLink[] = [
   },
 ];
 
-function Sidebar({ theme }: SidebarProps) {
+function Sidebar({ theme, isMobileMenuOpen, onClose }: SidebarProps) {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
 
@@ -65,12 +68,26 @@ function Sidebar({ theme }: SidebarProps) {
   };
   return (
     <aside
-      className={`flex h-screen w-64 shrink-0  flex-col border-r p-4 transition-colors ${
+      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 flex-col border-r p-4 transition-all duration-300 lg:static lg:z-auto lg:translate-x-0 ${
+        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+      } ${
         theme === "light"
           ? "border-gray-200 bg-white"
           : "border-gray-700 bg-slate-800"
       }`}
     >
+      <button
+        type="button"
+        aria-label="Close navigation"
+        onClick={onClose}
+        className={`absolute right-4 top-4 rounded-lg p-2 transition-colors lg:hidden ${
+          theme === "light"
+            ? "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+            : "text-gray-400 hover:bg-slate-700 hover:text-white"
+        }`}
+      >
+        <X size={20} />
+      </button>
       {/* Logo */}
       <header className="mb-8">
         <h1
@@ -99,6 +116,7 @@ function Sidebar({ theme }: SidebarProps) {
               <li key={link.title}>
                 <NavLink
                   to={link.path}
+                  onClick={onClose}
                   className={({ isActive }) =>
                     `flex items-center gap-3 rounded-lg p-3 transition-colors ${
                       isActive
