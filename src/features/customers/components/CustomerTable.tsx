@@ -17,9 +17,9 @@ function getInitials(name: string) {
 
 function CustomerTable({ customers, totalCustomers }: CustomerTableProps) {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+    <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md sm:p-6 dark:border-gray-700 dark:bg-gray-800">
       {/* Header */}
-      <header className="mb-5 flex items-start justify-between gap-4">
+      <header className="mb-5 flex items-start justify-between gap-3 sm:gap-4">
         <div>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Customers
