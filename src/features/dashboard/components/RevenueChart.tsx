@@ -55,21 +55,21 @@ function RevenueChart() {
 
   return (
     <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
-      <header className="flex items-start justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Revenue Overview
-          </h2>
+      <header className="flex items-start justify-between gap-3">
+  <div className="min-w-0">
+    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+      Revenue Overview
+    </h2>
 
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Track your revenue performance over time.
-          </p>
-        </div>
+    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+      Track your revenue performance over time.
+    </p>
+  </div>
 
-        <div className="rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-600 dark:border-gray-600 dark:text-gray-300">
-          Last 6 months
-        </div>
-      </header>
+  <div className="shrink-0 rounded-lg border border-gray-200 px-2 py-1.5 text-[11px] font-medium text-gray-600 dark:border-gray-600 dark:text-gray-300 sm:px-3 sm:py-2 sm:text-xs">
+    Last 6 months
+  </div>
+</header>
       {/* <div className="mt-6">
         <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
           Latest revenue
@@ -79,7 +79,7 @@ function RevenueChart() {
           {formatCurrency(latestRevenue)}
         </p>
       </div> */}
-      <section className="mt-6 h-80">
+      <section className="mt-6 h-64 sm:h-80">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}

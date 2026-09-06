@@ -63,7 +63,7 @@ function DashboardPage() {
     : [];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="mt-1 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">

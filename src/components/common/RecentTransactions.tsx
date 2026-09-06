@@ -72,7 +72,7 @@ function RecentTransactions() {
 
   return (
     <div className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
-      <header className="mb-6 flex items-start justify-between gap-4">
+      <header className="mb-6 flex items-start justify-between gap-3">
         <div>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Recent Transactions
@@ -83,7 +83,7 @@ function RecentTransactions() {
           </p>
         </div>
 
-        <div className="shrink-0 rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-600 dark:border-gray-600 dark:text-gray-300">
+        <div className="shrink-0 rounded-lg border border-gray-200 px-2 py-1.5 text-[11px] font-medium text-gray-600 dark:border-gray-600 dark:text-gray-300 sm:px-3 sm:py-2 sm:text-xs">
           {data.length} transactions
         </div>
       </header>
