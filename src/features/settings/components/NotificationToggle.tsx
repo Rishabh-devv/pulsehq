@@ -12,7 +12,7 @@ function NotificationToggle({
   onChange,
 }: NotificationToggleProps) {
   return (
-    <div className="flex items-center justify-between gap-6">
+    <div className="flex items-start justify-between gap-4 sm:items-center sm:gap-6">
       <div className="min-w-0">
         <h3 className="text-sm font-medium text-gray-900 dark:text-white">
           {title}
@@ -28,7 +28,7 @@ function NotificationToggle({
         onClick={onChange}
         aria-label={`${title}: ${enabled ? "On" : "Off"}`}
         aria-pressed={enabled}
-        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
           enabled ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
         }`}
       >

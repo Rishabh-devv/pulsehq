@@ -36,7 +36,7 @@ function AppearanceSection() {
         Customize how PulseHQ looks on your device.
       </p>
 
-      <div className="my-6 border-b border-gray-200 dark:border-gray-700" />
+      <div className="my-5 border-b border-gray-200 dark:border-gray-700 sm:my-6" />
 
       <div className="max-w-lg">
         <p className="text-sm font-medium text-gray-700 dark:text-gray-300">

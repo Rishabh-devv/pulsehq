@@ -29,7 +29,7 @@ function NotificationsSection({
         Choose which updates and alerts you want to receive.
       </p>
 
-      <div className="my-6 border-b border-gray-200 dark:border-gray-700" />
+      <div className="my-5 border-b border-gray-200 dark:border-gray-700 sm:my-6" />
 
       <div className="max-w-2xl divide-y divide-gray-200 dark:divide-gray-700">
         <div className="py-4 first:pt-0">

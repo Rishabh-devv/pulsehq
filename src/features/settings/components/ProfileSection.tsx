@@ -17,7 +17,7 @@ function ProfileSection({ profile, updateProfile }: ProfileSectionProps) {
         Manage your personal and professional information.
       </p>
 
-      <div className="my-6 border-b border-gray-200 dark:border-gray-700" />
+      <div className="my-5 sm:my-6 border-b border-gray-200 dark:border-gray-700" />
 
       <div className="max-w-lg space-y-5">
         <TextInput

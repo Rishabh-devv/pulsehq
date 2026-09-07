@@ -83,15 +83,15 @@ function SettingsPage() {
       </header>
 
       <div className="space-y-6">
-        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+        <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
           <ProfileSection profile={profile} updateProfile={updateProfile} />
         </section>
 
-        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+        <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
           <AppearanceSection />
         </section>
 
-        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+        <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
           <NotificationsSection
             notifications={notifications}
             setNotifications={setNotifications}
