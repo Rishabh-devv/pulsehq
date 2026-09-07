@@ -68,7 +68,7 @@ function Sidebar({ theme, isMobileMenuOpen, onClose }: SidebarProps) {
   };
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 flex-col border-r p-4 transition-all duration-300 lg:static lg:z-auto lg:translate-x-0 ${
+      className={`fixed inset-y-0 left-0 z-50 flex h-dvh w-64 shrink-0 flex-col overflow-y-auto overscroll-contain border-r p-4 transition-all duration-300 lg:static lg:z-auto lg:translate-x-0 ${
         isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
       } ${
         theme === "light"

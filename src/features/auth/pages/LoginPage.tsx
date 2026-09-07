@@ -83,12 +83,12 @@ function LoginPage() {
           {/* Decorative glow */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-32 -top-32 h-[520px] w-[520px] rounded-full bg-blue-400/20 blur-3xl"
+            className="pointer-events-none absolute -right-32 -top-32 h-130 w-130 rounded-full bg-blue-400/20 blur-3xl"
           />
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-56 -left-40 h-[600px] w-[600px] rounded-full bg-indigo-600/30 blur-3xl"
+            className="pointer-events-none absolute -bottom-56 -left-40 h-150 w-150 rounded-full bg-indigo-600/30 blur-3xl"
           />
 
           {/* Brand */}
@@ -103,7 +103,7 @@ function LoginPage() {
           </div>
 
           {/* Hero copy */}
-          <div className="relative z-10 mt-16 max-w-xl xl:mt-[68px]">
+          <div className="relative z-10 mt-16 max-w-xl xl:mt-17">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-blue-200">
               Business intelligence
             </p>
@@ -114,7 +114,7 @@ function LoginPage() {
               into <span className="text-blue-200">decisions.</span>
             </h1>
 
-            <p className="mt-6 max-w-[540px] text-base leading-7 text-blue-100 xl:text-lg">
+            <p className="mt-6 max-w-135 text-base leading-7 text-blue-100 xl:text-lg">
               The all-in-one dashboard for revenue, customers, analytics, and
               reports.
             </p>
@@ -169,15 +169,15 @@ function LoginPage() {
               ANALYTICS VISUAL
           ================================================== */}
           <div className="relative z-10 mt-auto pb-2 pt-8">
-            <div className="relative h-[225px] w-full max-w-[520px]">
+            <div className="relative h-56.25 w-full max-w-130">
               {/* Revenue card */}
               <div
                 className="
                   absolute bottom-6 left-0
-                  h-[180px] w-[295px]
+                  h-45 w-73.75
                   rounded-2xl
                   border border-white/20
-                  bg-white/[0.11]
+                  bg-white/11
                   p-5
                   shadow-2xl
                   backdrop-blur-md
@@ -199,10 +199,10 @@ function LoginPage() {
                 </div>
 
                 {/* Mini chart */}
-                <div className="relative mt-5 h-[78px] overflow-hidden">
+                <div className="relative mt-5 h-19.5 overflow-hidden">
                   <div className="absolute inset-x-0 bottom-0 border-b border-white/10" />
 
-                  <div className="absolute inset-x-0 bottom-3 flex h-[62px] items-end gap-2 px-1">
+                  <div className="absolute inset-x-0 bottom-3 flex h-15.5 items-end gap-2 px-1">
                     <div className="h-3 w-5 rounded-t bg-white/25" />
                     <div className="h-5 w-5 rounded-t bg-white/35" />
                     <div className="h-4 w-5 rounded-t bg-white/25" />
@@ -235,10 +235,10 @@ function LoginPage() {
               <div
                 className="
                   absolute bottom-3 right-0
-                  h-[145px] w-[190px]
+                  h-36.25 w-47.5
                   rounded-2xl
                   border border-white/20
-                  bg-white/[0.11]
+                  bg-white/11
                   p-4
                   shadow-2xl
                   backdrop-blur-md
@@ -247,7 +247,7 @@ function LoginPage() {
                 <p className="text-xs text-blue-100">Customer Growth</p>
 
                 <div className="mt-3 flex items-center justify-center">
-                  <div className="flex h-[82px] w-[82px] items-center justify-center rounded-full border-[10px] border-blue-300/50">
+                  <div className="flex h-20.5 w-20.5 items-center justify-center rounded-full border-10 border-blue-300/50">
                     <span className="text-lg font-bold">64%</span>
                   </div>
                 </div>
@@ -285,7 +285,7 @@ function LoginPage() {
             className="pointer-events-none absolute left-1/2 top-[18%] h-52 w-52 -translate-x-1/2 rounded-full bg-blue-200/30 blur-3xl dark:bg-blue-600/10"
           />
 
-          <div className="relative z-10 w-full max-w-[500px]">
+          <div className="relative z-10 w-full max-w-125">
             {/* Logo + heading */}
             <div className="text-center">
               <div className="relative mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-lg font-bold text-white shadow-lg shadow-blue-600/20">
@@ -309,7 +309,7 @@ function LoginPage() {
                   <Mail
                     size={19}
                     strokeWidth={1.8}
-                    className="pointer-events-none absolute left-4 top-[43px] z-10 text-slate-400"
+                    className="pointer-events-none absolute left-4 top-10.75 z-10 text-slate-400"
                   />
 
                   <TextInput
@@ -318,7 +318,7 @@ function LoginPage() {
                     placeholder="Enter your email"
                     autoComplete="email"
                     error={errors.email?.message}
-                    className="h-[50px] pl-12 pr-4 text-base"
+                    className="h-12.5 pl-12 pr-4 text-base"
                     {...register("email", {
                       onChange: () => setServerError(""),
                     })}
@@ -330,7 +330,7 @@ function LoginPage() {
                   <LockKeyhole
                     size={19}
                     strokeWidth={1.8}
-                    className="pointer-events-none absolute left-4 top-[43px] z-10 text-slate-400"
+                    className="pointer-events-none absolute left-4 top-10.75 z-10 text-slate-400"
                   />
 
                   <TextInput
@@ -339,7 +339,7 @@ function LoginPage() {
                     placeholder="Enter your password"
                     autoComplete="current-password"
                     error={errors.password?.message}
-                    className="h-[50px] pl-12 pr-12 text-base"
+                    className="h-12.5 pl-12 pr-12 text-base"
                     {...register("password", {
                       onChange: () => setServerError(""),
                     })}
@@ -351,14 +351,14 @@ function LoginPage() {
                       showPassword ? "Hide password" : "Show password"
                     }
                     onClick={() => setShowPassword((previous) => !previous)}
-                    className="absolute right-4 top-[42px] z-10 rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                    className="absolute right-4 top-10.5 z-10 rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-200"
                   >
                     {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
                   </button>
                 </div>
 
                 {/* Remember / forgot */}
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                   <Checkbox
                     label="Remember me"
                     checked={rememberMe}
@@ -387,7 +387,7 @@ function LoginPage() {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="h-[52px] w-full text-base"
+                  className="h-13 w-full text-base"
                 >
                   {isLoading ? "Signing In..." : "Sign In"}
                 </Button>
