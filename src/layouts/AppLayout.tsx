@@ -15,7 +15,7 @@ function AppLayout() {
 
   return (
     <div
-      className={`flex h-screen ${
+      className={`flex h-dvh ${
         resolvedTheme === "light" ? "bg-slate-100" : "bg-slate-900"
       } transition-colors duration-200`}
     >
@@ -33,7 +33,7 @@ function AppLayout() {
         />
       )}
 
-      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
         <Navbar
           theme={resolvedTheme}
           toggleTheme={toggleTheme}
