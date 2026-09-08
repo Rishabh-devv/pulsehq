@@ -5,81 +5,75 @@ import type {
 } from "@/types/analytics";
 
 const DEMO_ANALYTICS_OVERVIEW: AnalyticsOverview = {
-  revenue: 245000,
-  visitors: 8200,
-  conversionRate: 12.5,
-  bounceRate: 32,
+  revenue: 284650,
+  visitors: 27400,
+  conversionRate: 7.9,
+  bounceRate: 38,
 };
 
 const DEMO_TRAFFIC_SOURCES: TrafficSource[] = [
   {
     sourceName: "Google",
-    visitors: 1000,
-    percentage: 12,
-    country: "USA",
+    visitors: 9864,
+    percentage: 36,
+    country: "United States",
   },
   {
     sourceName: "Direct",
-    visitors: 1011,
-    percentage: 10,
-    country: "USA",
+    visitors: 5480,
+    percentage: 20,
+    country: "United States",
   },
   {
     sourceName: "Social",
-    visitors: 1200,
-    percentage: 16,
-    country: "USA",
+    visitors: 3836,
+    percentage: 14,
+    country: "India",
   },
   {
     sourceName: "Email",
-    visitors: 1800,
-    percentage: 30,
-    country: "USA",
+    visitors: 3288,
+    percentage: 12,
+    country: "United Kingdom",
   },
   {
     sourceName: "Referral",
-    visitors: 2200,
-    percentage: 20,
-    country: "USA",
+    visitors: 3014,
+    percentage: 11,
+    country: "Canada",
   },
   {
     sourceName: "Other",
-    visitors: 800,
-    percentage: 12,
-    country: "USA",
+    visitors: 1918,
+    percentage: 7,
+    country: "Australia",
   },
 ];
 
 const DEMO_TRAFFIC_DATA: TrafficData[] = [
-  { month: "Jan", visitors: 4000 },
-  { month: "Feb", visitors: 4500 },
-  { month: "Mar", visitors: 5200 },
-  { month: "Apr", visitors: 4800 },
-  { month: "May", visitors: 6100 },
-  { month: "Jun", visitors: 6800 },
+  { month: "Jan", visitors: 19800 },
+  { month: "Feb", visitors: 21100 },
+  { month: "Mar", visitors: 22400 },
+  { month: "Apr", visitors: 23100 },
+  { month: "May", visitors: 25600 },
+  { month: "Jun", visitors: 27400 },
 ];
 
 export const analyticsService = {
   async getOverview(): Promise<AnalyticsOverview> {
-    await new Promise((resolve) =>
-      setTimeout(resolve, 1000)
-    );
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     return DEMO_ANALYTICS_OVERVIEW;
   },
 
   async getTrafficSources(): Promise<TrafficSource[]> {
-    await new Promise((resolve) =>
-      setTimeout(resolve, 1000)
-    );
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     return DEMO_TRAFFIC_SOURCES;
   },
 
   async getTrafficData(): Promise<TrafficData[]> {
-    await new Promise((resolve) =>
-      setTimeout(resolve, 1000)
-    );
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     return DEMO_TRAFFIC_DATA;
   },

@@ -1,20 +1,21 @@
 import type { RevenueOverview, RevenueData } from "@/types/revenue";
 
 const DEMO_REVENUE_OVERVIEW: RevenueOverview = {
-  totalRevenue: 52430,
-  monthlyRevenue: 26000,
-  averageOrderValue: 125,
-  growth: 12,
-  customers: 1245,
-  customerGrowth: 8,
+  totalRevenue: 284650,
+  monthlyRevenue: 52380,
+  averageOrderValue: 134,
+  growth: 14.6,
+  customers: 8429,
+  customerGrowth: 9.8,
 };
+
 const DEMO_REVENUE_DATA: RevenueData[] = [
-  { month: "Jan", revenue: 12000 },
-  { month: "Feb", revenue: 15000 },
-  { month: "Mar", revenue: 18000 },
-  { month: "Apr", revenue: 17000 },
-  { month: "May", revenue: 22000 },
-  { month: "Jun", revenue: 26000 },
+  { month: "Jan", revenue: 36420 },
+  { month: "Feb", revenue: 39180 },
+  { month: "Mar", revenue: 42850 },
+  { month: "Apr", revenue: 45120 },
+  { month: "May", revenue: 48800 },
+  { month: "Jun", revenue: 52380 },
 ];
 
 export const revenueService = {

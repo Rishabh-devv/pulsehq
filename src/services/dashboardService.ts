@@ -2,57 +2,58 @@ import type { DashboardStats, Transaction } from "@/types/dashboard";
 import type { RevenueData } from "@/types/revenue";
 
 const DEMO_DASHBOARD_STATS: DashboardStats = {
-  revenue: 245000,
-  customers: 1240,
-  orders: 845,
-  growth: 15,
+  revenue: 284650,
+  customers: 8429,
+  orders: 2124,
+  growth: 14.6,
 };
 
 const DEMO_TRANSACTIONS: Transaction[] = [
   {
-    id: "1",
-    customer: "John Doe",
-    amount: 250,
-    date: "2023-08-01",
+    id: "txn_001",
+    customer: "Aarav Mehta",
+    amount: 1240,
+    date: "2025-11-28",
     status: "Completed",
   },
   {
-    id: "2",
-    customer: "Jane Smith",
-    amount: 150,
-    date: "2023-08-02",
+    id: "txn_002",
+    customer: "Sophia Bennett",
+    amount: 680,
+    date: "2025-11-27",
+    status: "Completed",
+  },
+  {
+    id: "txn_003",
+    customer: "Daniel Kim",
+    amount: 450,
+    date: "2025-11-26",
     status: "Pending",
   },
   {
-    id: "3",
-    customer: "Alice Johnson",
-    amount: 300,
-    date: "2023-08-03",
-    status: "Failed",
-  },
-  {
-    id: "4",
-    customer: "Michael Brown",
-    amount: 450,
-    date: "2023-08-04",
+    id: "txn_004",
+    customer: "Pratigya Sharma",
+    amount: 4000,
+    date: "2025-11-24",
     status: "Completed",
   },
   {
-    id: "5",
-    customer: "Michael Jackson",
-    amount: 500,
-    date: "2023-08-08",
-    status: "Failed",
+    id: "txn_005",
+    customer: "Arjun Kapoor",
+    amount: 1680,
+    date: "2025-11-23",
+    status: "Pending",
   },
+  
 ];
 
 const DEMO_REVENUE_DATA: RevenueData[] = [
-  { month: "Jan", revenue: 18000 },
-  { month: "Feb", revenue: 50000 },
-  { month: "Mar", revenue: 20000 },
-  { month: "Apr", revenue: 60000 },
-  { month: "May", revenue: 25000 },
-  { month: "Jun", revenue: 72000 },
+  { month: "Jan", revenue: 36420 },
+  { month: "Feb", revenue: 39180 },
+  { month: "Mar", revenue: 42850 },
+  { month: "Apr", revenue: 45120 },
+  { month: "May", revenue: 48800 },
+  { month: "Jun", revenue: 52380 },
 ];
 
 export const dashboardService = {
