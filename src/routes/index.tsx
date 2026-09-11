@@ -1,14 +1,41 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
+
 import AppLayout from "@/layouts/AppLayout";
-import DashboardPage from "@/features/dashboard/pages/DashboardPage";
-import SettingsPage from "@/features/settings/pages/SettingsPage";
-import AnalyticsPage from "@/features/analytics/pages/AnalyticsPage";
-import CustomersPage from "@/features/customers/pages/CustomersPage";
-import RevenuePage from "@/features/revenue/pages/RevenuePage";
-import ReportsPage from "@/features/reports/pages/ReportsPage";
-import LoginPage from "@/features/auth/pages/LoginPage";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
+
+const DashboardPage = lazy(
+  () => import("@/features/dashboard/pages/DashboardPage")
+);
+
+const SettingsPage = lazy(
+  () => import("@/features/settings/pages/SettingsPage")
+);
+
+const AnalyticsPage = lazy(
+  () => import("@/features/analytics/pages/AnalyticsPage")
+);
+
+const CustomersPage = lazy(
+  () => import("@/features/customers/pages/CustomersPage")
+);
+
+const RevenuePage = lazy(() => import("@/features/revenue/pages/RevenuePage"));
+
+const ReportsPage = lazy(() => import("@/features/reports/pages/ReportsPage"));
+
+const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
+
+const PageLoader = () => (
+  <div className="flex min-h-[50vh] items-center justify-center">
+    <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-200 border-t-blue-600" />
+  </div>
+);
+
+const withSuspense = (element: React.ReactNode) => (
+  <Suspense fallback={<PageLoader />}>{element}</Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +44,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <LoginPage />,
+        element: withSuspense(<LoginPage />),
       },
     ],
   },
@@ -30,27 +57,27 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <DashboardPage />,
+            element: withSuspense(<DashboardPage />),
           },
           {
             path: "settings",
-            element: <SettingsPage />,
+            element: withSuspense(<SettingsPage />),
           },
           {
             path: "analytics",
-            element: <AnalyticsPage />,
+            element: withSuspense(<AnalyticsPage />),
           },
           {
             path: "customers",
-            element: <CustomersPage />,
+            element: withSuspense(<CustomersPage />),
           },
           {
-            path: "revenue",    
-            element: <RevenuePage />,
+            path: "revenue",
+            element: withSuspense(<RevenuePage />),
           },
           {
             path: "reports",
-            element: <ReportsPage />,
+            element: withSuspense(<ReportsPage />),
           },
         ],
       },
